@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>スケジュール・予約 | Eigo No Sensei</title>
+  <meta name="description" content="英語レッスンのご予約・空き状況の確認はこちらから。町田・相模原エリアのネイティブ英語講師テリーのレッスンスケジュール。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sky:     #4A90C4;
+      --sky-lt:  #EBF4FB;
+      --sky-md:  #C8E2F4;
+      --coral:   #E8715A;
+      --ink:     #1A2535;
+      --ink-md:  #4A5568;
+      --ink-lt:  #718096;
+      --paper:   #FAFCFE;
+      --white:   #FFFFFF;
+      --border:  rgba(74,144,196,0.15);
+      --radius:  16px;
+      --radius-sm: 8px;
+      --available: #EBF4FB;
+      --available-border: #4A90C4;
+      --booked:  #FDF0ED;
+      --booked-border: #E8715A;
+      --empty:   #F7F9FC;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 400;
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,252,254,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5vw;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      font-size: 1.1rem; font-weight: 800; color: var(--sky);
+      letter-spacing: -0.01em; text-decoration: none;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .nav-logo span {
+      font-family: 'Noto Serif JP', serif; font-weight: 400;
+      font-size: 0.85rem; color: var(--ink-md);
+    }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.9rem; font-weight: 600; color: var(--ink-md); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--sky); }
+    .nav-cta {
+      background: var(--coral); color: #fff !important;
+      padding: 0.5rem 1.25rem; border-radius: 100px;
+    }
+    .nav-cta:hover { background: #d45f49 !important; }
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--ink); border-radius: 2px; }
+    .nav-mobile {
+      display: none; position: absolute; top: 64px; left: 0; right: 0;
+      background: var(--white); border-bottom: 1px solid var(--border);
+      padding: 1.5rem 5vw; flex-direction: column; gap: 1rem;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { font-size: 1rem; font-weight: 600; color: var(--ink-md); text-decoration: none; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+    .nav-mobile a:last-child { border-bottom: none; }
+    .nav-mobile .nav-cta { text-align: center; background: var(--coral); color: #fff !important; padding: 0.75rem; border-radius: 100px; border-bottom: none; }
+
+    /* PAGE HEADER */
+    .page-header {
+      background: linear-gradient(135deg, var(--sky-lt) 0%, var(--white) 100%);
+      border-bottom: 1px solid var(--sky-md);
+      padding: 3rem 5vw 2.5rem;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800; color: var(--ink);
+      letter-spacing: -0.02em; margin-bottom: 0.4rem;
+    }
+    .page-header p {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 0.95rem; color: var(--ink-lt);
+    }
+
+    /* LEGEND */
+    .legend {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1.5rem; flex-wrap: wrap;
+      padding: 1rem 5vw;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.82rem; font-weight: 600; color: var(--ink-md);
+    }
+    .legend-item { display: flex; align-items: center; gap: 0.4rem; }
+    .legend-dot {
+      width: 14px; height: 14px; border-radius: 4px;
+      border: 2px solid;
+    }
+    .legend-dot.available { background: var(--available); border-color: var(--available-border); }
+    .legend-dot.booked { background: var(--booked); border-color: var(--booked-border); }
+    .legend-dot.empty { background: var(--empty); border-color: #CBD5E0; }
+
+    /* WEEK NAV */
+    .week-nav {
+      max-width: 1200px; margin: 1.5rem auto 0;
+      padding: 0 5vw;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .week-nav-btn {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 0.5rem 1rem;
+      font-size: 0.88rem; font-weight: 700; color: var(--sky);
+      cursor: pointer; transition: all 0.2s;
+      font-family: 'Nunito', sans-serif;
+    }
+    .week-nav-btn:hover { background: var(--sky); color: #fff; }
+    .week-label {
+      font-size: 0.95rem; font-weight: 700; color: var(--ink);
+      text-align: center;
+    }
+    .week-label span {
+      display: block; font-family: 'Noto Serif JP', serif;
+      font-size: 0.78rem; font-weight: 300; color: var(--ink-lt);
+    }
+
+    /* CALENDAR */
+    .calendar-wrap {
+      max-width: 1200px; margin: 1.5rem auto 3rem;
+      padding: 0 5vw; overflow-x: auto;
+    }
+    .calendar {
+      display: grid;
+      grid-template-columns: 64px repeat(7, 1fr);
+      min-width: 700px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    /* Header row */
+    .cal-header {
+      background: var(--sky);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-align: center;
+      padding: 0.75rem 0.25rem;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+    .cal-header:last-child { border-right: none; }
+    .cal-header.time-header { background: #3a7ab0; }
+    .cal-header .day-name { display: block; font-size: 0.85rem; }
+    .cal-header .day-date { display: block; font-size: 0.72rem; opacity: 0.8; margin-top: 0.1rem; }
+    .cal-header.weekend { background: #5a9fd4; }
+
+    /* Time labels */
+    .cal-time {
+      font-size: 0.68rem; font-weight: 700;
+      color: var(--ink-lt);
+      text-align: center;
+      padding: 0;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      background: #F7F9FC;
+      min-height: 44px;
+    }
+    .cal-time:last-of-type { border-bottom: none; }
+
+    /* Slots */
+    .cal-slot {
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      min-height: 44px;
+      cursor: pointer;
+      transition: all 0.15s;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 700;
+      text-align: center; padding: 2px 3px;
+    }
+    .cal-slot:last-child { border-right: none; }
+    .cal-slot.outside-hours {
+      background: #F0F4F8;
+      cursor: default;
+      color: transparent;
+    }
+    .cal-slot.empty-slot {
+      background: var(--empty);
+      color: transparent;
+    }
+    .cal-slot.empty-slot:hover {
+      background: var(--sky-lt);
+      color: var(--sky);
+    }
+    .cal-slot.empty-slot:hover::after {
+      content: '+';
+      font-size: 1.2rem;
+      color: var(--sky);
+    }
+    .cal-slot.available-slot {
+      background: var(--available);
+      border-color: var(--available-border);
+      color: var(--sky);
+    }
+    .cal-slot.available-slot:hover {
+      background: var(--sky);
+      color: #fff;
+    }
+    .cal-slot.booked-slot {
+      background: var(--booked);
+      border-left: 3px solid var(--coral);
+      color: var(--coral);
+      cursor: default;
+      font-size: 0.68rem;
+      line-height: 1.3;
+    }
+    .admin-mode .cal-slot.booked-slot {
+      cursor: pointer;
+    }
+    .admin-mode .cal-slot.booked-slot:hover {
+      background: #fce4e0;
+    }
+    .admin-mode .cal-slot.empty-slot:hover::after {
+      content: '予約追加';
+      font-size: 0.65rem;
+    }
+
+    /* ENQUIRY SECTION */
+    .enquiry-section {
+      background: var(--sky-lt);
+      border-top: 1px solid var(--sky-md);
+      border-bottom: 1px solid var(--sky-md);
+      padding: 3rem 5vw;
+    }
+    .enquiry-inner {
+      max-width: 640px; margin: 0 auto; text-align: center;
+    }
+    .enquiry-inner h2 {
+      font-size: 1.6rem; font-weight: 800; color: var(--ink);
+      margin-bottom: 0.4rem;
+    }
+    .enquiry-inner .sub {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 0.9rem; color: var(--ink-lt);
+      margin-bottom: 2rem;
+    }
+    .enquiry-form { display: flex; flex-direction: column; gap: 1rem; text-align: left; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    .form-group label {
+      font-size: 0.8rem; font-weight: 700; color: var(--ink-md);
+    }
+    .form-group label span {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 300; font-size: 0.75rem; color: var(--ink-lt);
+      margin-left: 0.3rem;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.7rem 1rem;
+      font-size: 0.9rem;
+      font-family: 'Nunito', sans-serif;
+      color: var(--ink);
+      background: var(--white);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--sky);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-submit {
+      background: var(--coral); color: #fff;
+      border: none; border-radius: 100px;
+      padding: 0.9rem 2rem;
+      font-size: 1rem; font-weight: 700;
+      font-family: 'Nunito', sans-serif;
+      cursor: pointer; transition: background 0.2s;
+      margin-top: 0.5rem;
+    }
+    .form-submit:hover { background: #d45f49; }
+    .form-note {
+      font-size: 0.78rem; color: var(--ink-lt);
+      text-align: center; margin-top: 0.5rem;
+    }
+
+    /* ADMIN PANEL */
+    .admin-trigger {
+      position: fixed; bottom: 1.5rem; right: 1.5rem;
+      width: 44px; height: 44px;
+      background: transparent; border: none;
+      cursor: pointer; opacity: 0.01;
+      z-index: 200;
+    }
+    .admin-bar {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #1e4d72; color: #fff;
+      padding: 0.75rem 5vw;
+      align-items: center; justify-content: space-between;
+      gap: 1rem; z-index: 150;
+      font-size: 0.85rem;
+    }
+    .admin-bar.visible { display: flex; }
+    .admin-bar-left { display: flex; align-items: center; gap: 0.75rem; }
+    .admin-indicator {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--coral); animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .admin-close {
+      background: rgba(255,255,255,0.1); border: none; color: #fff;
+      padding: 0.4rem 1rem; border-radius: var(--radius-sm);
+      cursor: pointer; font-family: 'Nunito', sans-serif;
+      font-size: 0.8rem; font-weight: 600;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(26,37,53,0.5); z-index: 300;
+      align-items: center; justify-content: center;
+      padding: 1rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--white); border-radius: var(--radius);
+      padding: 2rem; width: 100%; max-width: 380px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.2);
+    }
+    .modal h3 { font-size: 1.1rem; font-weight: 800; color: var(--ink); margin-bottom: 1.25rem; }
+    .modal-form { display: flex; flex-direction: column; gap: 0.75rem; }
+    .modal-form input {
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      padding: 0.65rem 1rem; font-size: 0.9rem;
+      font-family: 'Nunito', sans-serif; color: var(--ink);
+      outline: none;
+    }
+    .modal-form input:focus { border-color: var(--sky); }
+    .modal-btns { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
+    .modal-btn-confirm {
+      flex: 1; background: var(--sky); color: #fff;
+      border: none; border-radius: 100px;
+      padding: 0.7rem; font-size: 0.9rem; font-weight: 700;
+      font-family: 'Nunito', sans-serif; cursor: pointer;
+    }
+    .modal-btn-cancel {
+      flex: 1; background: var(--empty); color: var(--ink-md);
+      border: 1px solid var(--border); border-radius: 100px;
+      padding: 0.7rem; font-size: 0.9rem; font-weight: 700;
+      font-family: 'Nunito', sans-serif; cursor: pointer;
+    }
+    .modal-btn-remove {
+      width: 100%; background: var(--booked); color: var(--coral);
+      border: 1px solid var(--booked-border); border-radius: 100px;
+      padding: 0.7rem; font-size: 0.9rem; font-weight: 700;
+      font-family: 'Nunito', sans-serif; cursor: pointer;
+      margin-top: 0.5rem;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: #1e4d72; color: rgba(255,255,255,0.7);
+      padding: 2.5rem 5vw; text-align: center; font-size: 0.82rem;
+    }
+    .footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+    .footer a:hover { color: #C8E2F4; }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .form-row { grid-template-columns: 1fr; }
+      .week-label span { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    Eigo No Sensei <span>英語の先生</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="lessons.html">レッスン</a></li>
+    <li><a href="about.html">テリーについて</a></li>
+    <li><a href="schedule.html" class="active">スケジュール・予約</a></li>
+    <li><a href="faq.html">よくある質問</a></li>
+    <li><a href="contact.html" class="nav-cta">お問い合わせ</a></li>
+  </ul>
+  <button class="nav-hamburger" onclick="document.querySelector('.nav-mobile').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile">
+  <a href="lessons.html">レッスン</a>
+  <a href="about.html">テリーについて</a>
+  <a href="schedule.html">スケジュール・予約</a>
+  <a href="faq.html">よくある質問</a>
+  <a href="contact.html" class="nav-cta">お問い合わせ</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <h1>スケジュール・予約</h1>
+  <p>Schedule &amp; Bookings — 空き状況をご確認のうえ、お気軽にお問い合わせください。</p>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot available"></div>空き あり</div>
+  <div class="legend-item"><div class="legend-dot booked"></div>予約済み</div>
+  <div class="legend-item"><div class="legend-dot empty"></div>対応時間外</div>
+</div>
+
+<!-- WEEK NAV -->
+<div class="week-nav">
+  <button class="week-nav-btn" onclick="changeWeek(-1)">← 前の週</button>
+  <div class="week-label">
+    <span id="week-range"></span>
+    今週のスケジュール
+  </div>
+  <button class="week-nav-btn" onclick="changeWeek(1)">次の週 →</button>
+</div>
+
+<!-- CALENDAR -->
+<div class="calendar-wrap">
+  <div class="calendar" id="calendar"></div>
+</div>
+
+<!-- ENQUIRY -->
+<div class="enquiry-section">
+  <div class="enquiry-inner">
+    <h2>レッスンのお申し込み</h2>
+    <p class="sub">Lesson Enquiry — ご希望の曜日・時間帯をお知らせください。</p>
+    <form class="enquiry-form" onsubmit="handleEnquiry(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>お名前 <span>Name</span></label>
+          <input type="text" placeholder="山田 太郎" required>
+        </div>
+        <div class="form-group">
+          <label>メールアドレス <span>Email</span></label>
+          <input type="email" placeholder="example@email.com" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>ご希望の曜日 <span>Preferred day</span></label>
+          <select>
+            <option>月曜日 Monday</option>
+            <option>火曜日 Tuesday</option>
+            <option>水曜日 Wednesday</option>
+            <option>木曜日 Thursday</option>
+            <option>金曜日 Friday</option>
+            <option>土曜日 Saturday</option>
+            <option>日曜日 Sunday</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>ご希望の時間帯 <span>Preferred time</span></label>
+          <select>
+            <option>午前 Morning (6:00–12:00)</option>
+            <option>午後 Afternoon (12:00–18:00)</option>
+            <option>夜 Evening (18:00–22:00)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>レッスン形式 <span>Lesson type</span></label>
+          <select>
+            <option>日常英会話</option>
+            <option>ビジネス英語</option>
+            <option>TOEIC対策</option>
+            <option>読み書き</option>
+            <option>リスニング</option>
+            <option>旅行英会話</option>
+            <option>その他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>レッスン場所 <span>Location</span></label>
+          <select>
+            <option>カフェ Café</option>
+            <option>自宅 Home</option>
+            <option>オンライン Online (Teams)</option>
+            <option>オンライン Online (Google Meet)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>メッセージ <span>Message (optional)</span></label>
+        <textarea placeholder="現在の英語レベルや学習の目標などをお聞かせください。"></textarea>
+      </div>
+      <button type="submit" class="form-submit">送信する · Send Enquiry</button>
+      <p class="form-note">※ 送信後、テリーより2営業日以内にご連絡いたします。最初のご相談は無料です。<br>After submitting, Terry will be in touch within 2 business days. First consultation is free.</p>
+    </form>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© 2026 Eigo No Sensei · 英語の先生 · Machida, Tokyo &nbsp;|&nbsp; <a href="mailto:terry@eigonosensei.jp">terry@eigonosensei.jp</a></p>
+</footer>
+
+<!-- ADMIN TRIGGER (invisible corner button) -->
+<button class="admin-trigger" id="adminTrigger" onclick="promptAdmin()"></button>
+
+<!-- ADMIN BAR -->
+<div class="admin-bar" id="adminBar">
+  <div class="admin-bar-left">
+    <div class="admin-indicator"></div>
+    <span>管理者モード · Admin Mode — スロットをクリックして予約を追加・削除できます。</span>
+  </div>
+  <button class="admin-close" onclick="exitAdmin()">終了 Exit</button>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h3 id="modal-title">予約を追加</h3>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+  // ── STATE ──
+  const ADMIN_PASSWORD = 'eigo2026';
+  let isAdmin = false;
+  let weekOffset = 0;
+  let bookings = JSON.parse(localStorage.getItem('eigo_bookings') || '{}');
+  let pendingSlot = null;
+
+  // Hours config
+  const WEEKDAY_START = 6, WEEKDAY_END = 22;
+  const WEEKEND_START = 6, WEEKEND_END = 18;
+  const DAYS_JP = ['日','月','火','水','木','金','土'];
+  const DAYS_EN = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+  // ── WEEK HELPERS ──
+  function getWeekDates(offset) {
+    const now = new Date();
+    const day = now.getDay(); // 0=Sun
+    const monday = new Date(now);
+    monday.setDate(now.getDate() - day + 1 + offset * 7);
+    const dates = [];
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(monday);
+      d.setDate(monday.getDate() + i);
+      dates.push(d);
+    }
+    return dates;
+  }
+
+  function fmtDate(d) {
+    return `${d.getMonth()+1}/${d.getDate()}`;
+  }
+
+  function slotKey(dateStr, hour) {
+    return `${dateStr}_${hour}`;
+  }
+
+  function dateStr(d) {
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
+
+  // ── RENDER CALENDAR ──
+  function renderCalendar() {
+    const dates = getWeekDates(weekOffset);
+    const cal = document.getElementById('calendar');
+    cal.innerHTML = '';
+
+    // Week label
+    document.getElementById('week-range').textContent =
+      `${fmtDate(dates[0])} 〜 ${fmtDate(dates[6])}`;
+
+    // Header row
+    const timeHeader = document.createElement('div');
+    timeHeader.className = 'cal-header time-header';
+    timeHeader.textContent = '時間';
+    cal.appendChild(timeHeader);
+
+    dates.forEach((d, i) => {
+      const isWeekend = (d.getDay() === 0 || d.getDay() === 6);
+      const hdr = document.createElement('div');
+      hdr.className = 'cal-header' + (isWeekend ? ' weekend' : '');
+      hdr.innerHTML = `<span class="day-name">${DAYS_JP[d.getDay()]} ${DAYS_EN[d.getDay()]}</span><span class="day-date">${fmtDate(d)}</span>`;
+      cal.appendChild(hdr);
+    });
+
+    // Time rows 6:00 to 22:00
+    for (let hour = 6; hour <= 21; hour++) {
+      // Time label
+      const timeLabel = document.createElement('div');
+      timeLabel.className = 'cal-time';
+      timeLabel.textContent = `${hour}:00`;
+      cal.appendChild(timeLabel);
+
+      dates.forEach(d => {
+        const isWeekend = (d.getDay() === 0 || d.getDay() === 6);
+        const endHour = isWeekend ? WEEKEND_END : WEEKDAY_END;
+        const slot = document.createElement('div');
+        const key = slotKey(dateStr(d), hour);
+        const booking = bookings[key];
+
+        if (hour >= endHour) {
+          slot.className = 'cal-slot outside-hours';
+        } else if (booking) {
+          slot.className = 'cal-slot booked-slot';
+          slot.textContent = booking.name;
+          if (isAdmin) {
+            slot.onclick = () => openRemoveModal(key, booking, d, hour);
+          }
+        } else {
+          slot.className = 'cal-slot empty-slot';
+          if (isAdmin) {
+            slot.onclick = () => openAddModal(key, d, hour);
+          }
+        }
+        cal.appendChild(slot);
+      });
+    }
+  }
+
+  function changeWeek(dir) {
+    weekOffset += dir;
+    renderCalendar();
+  }
+
+  // ── ADMIN ──
+  function promptAdmin() {
+    const pw = prompt('管理者パスワードを入力してください\nEnter admin password:');
+    if (pw === ADMIN_PASSWORD) {
+      isAdmin = true;
+      document.getElementById('adminBar').classList.add('visible');
+      document.body.classList.add('admin-mode');
+      renderCalendar();
+    }
+  }
+
+  function exitAdmin() {
+    isAdmin = false;
+    document.getElementById('adminBar').classList.remove('visible');
+    document.body.classList.remove('admin-mode');
+    renderCalendar();
+  }
+
+  // ── MODALS ──
+  function openAddModal(key, d, hour) {
+    pendingSlot = key;
+    document.getElementById('modal-title').textContent = `予約追加 · ${fmtDate(d)} ${DAYS_JP[d.getDay()]} ${hour}:00〜${hour+1}:00`;
+    document.getElementById('modal-body').innerHTML = `
+      <div class="modal-form">
+        <input type="text" id="modal-name" placeholder="生徒のお名前 Student name" />
+        <input type="text" id="modal-lesson" placeholder="レッスン内容 Lesson type" />
+        <div class="modal-btns">
+          <button class="modal-btn-confirm" onclick="confirmAdd()">追加 Add</button>
+          <button class="modal-btn-cancel" onclick="closeModal()">キャンセル</button>
+        </div>
+      </div>`;
+    document.getElementById('modal').classList.add('open');
+  }
+
+  function openRemoveModal(key, booking, d, hour) {
+    pendingSlot = key;
+    document.getElementById('modal-title').textContent = `予約確認 · ${fmtDate(d)} ${DAYS_JP[d.getDay()]} ${hour}:00〜${hour+1}:00`;
+    document.getElementById('modal-body').innerHTML = `
+      <div class="modal-form">
+        <p style="font-size:0.9rem;color:var(--ink-md);margin-bottom:0.5rem;">
+          <strong>${booking.name}</strong><br>
+          <span style="font-size:0.82rem;color:var(--ink-lt);">${booking.lesson || ''}</span>
+        </p>
+        <div class="modal-btns">
+          <button class="modal-btn-cancel" onclick="closeModal()">閉じる Close</button>
+        </div>
+        <button class="modal-btn-remove" onclick="confirmRemove()">予約を削除 Remove</button>
+      </div>`;
+    document.getElementById('modal').classList.add('open');
+  }
+
+  function confirmAdd() {
+    const name = document.getElementById('modal-name').value.trim();
+    const lesson = document.getElementById('modal-lesson').value.trim();
+    if (!name) { alert('お名前を入力してください。'); return; }
+    bookings[pendingSlot] = { name, lesson };
+    localStorage.setItem('eigo_bookings', JSON.stringify(bookings));
+    closeModal();
+    renderCalendar();
+  }
+
+  function confirmRemove() {
+    delete bookings[pendingSlot];
+    localStorage.setItem('eigo_bookings', JSON.stringify(bookings));
+    closeModal();
+    renderCalendar();
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    pendingSlot = null;
+  }
+
+  // Close modal on overlay click
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // ── ENQUIRY FORM ──
+  function handleEnquiry(e) {
+    e.preventDefault();
+    alert('お問い合わせありがとうございます！\nTerry will be in touch within 2 business days.\n\nテリーより2営業日以内にご連絡いたします。');
+    e.target.reset();
+  }
+
+  // ── INIT ──
+  renderCalendar();
+</script>
+</body>
+</html>
