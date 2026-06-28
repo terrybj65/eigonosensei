@@ -393,6 +393,19 @@
       .nav-hamburger { display: flex; }
       .form-row { grid-template-columns: 1fr; }
       .week-label span { display: none; }
+      .calendar-wrap { padding: 0 3vw; }
+      .calendar { min-width: 560px; font-size: 0.72rem; }
+      .cal-slot { min-height: 36px; font-size: 0.65rem; }
+      .cal-time { font-size: 0.6rem; min-height: 36px; }
+      .cal-header { font-size: 0.7rem; padding: 0.5rem 0.15rem; }
+      .week-nav { padding: 0 3vw; }
+      .enquiry-section { padding: 2rem 4vw; }
+      .enquiry-inner h2 { font-size: 1.3rem; }
+      .form-submit { width: 100%; }
+      .scroll-hint { display: block !important; }
+    }
+    @media (min-width: 769px) {
+      .scroll-hint { display: none; }
     }
   </style>
 </head>
@@ -404,22 +417,25 @@
     Eigo No Sensei <span>英語の先生</span>
   </a>
   <ul class="nav-links">
-    <li><a href="lessons.html">レッスン</a></li>
-    <li><a href="about.html">テリーについて</a></li>
-    <li><a href="schedule.html" class="active">スケジュール・予約</a></li>
-    <li><a href="faq.html">よくある質問</a></li>
-    <li><a href="contact.html" class="nav-cta">お問い合わせ</a></li>
+    <li><a href="lessons.html" onclick="">レッスン</a></li>
+    <li><a href="about.html" onclick="">テリーについて</a></li>
+    <li><a href="schedule.html" class="active" onclick="">スケジュール・予約</a></li>
+    <li><a href="faq.html" onclick="">よくある質問</a></li>
+    <li><a href="free-trial.html" class="nav-cta" onclick="">無料体験レッスン</a></li>
   </ul>
   <button class="nav-hamburger" onclick="document.querySelector('.nav-mobile').classList.toggle('open')" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 <div class="nav-mobile">
-  <a href="lessons.html">レッスン</a>
-  <a href="about.html">テリーについて</a>
-  <a href="schedule.html">スケジュール・予約</a>
-  <a href="faq.html">よくある質問</a>
-  <a href="contact.html" class="nav-cta">お問い合わせ</a>
+  <a href="index.html" onclick="">ホーム</a>
+  <a href="lessons.html" onclick="">レッスン</a>
+  <a href="about.html" onclick="">テリーについて</a>
+  <a href="schedule.html" onclick="">スケジュール・予約</a>
+  <a href="faq.html" onclick="">よくある質問</a>
+  <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="nav-cta" style="cursor:pointer;">📧 メールでお問い合わせ</a>
+  <a href="https://line.me/ti/p/uBFxywc-E8" class="nav-cta" style="background:#06C755;" onclick="">🟢 LINEでお問い合わせ</a>
+  <p style="font-size:12px;color:#888;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid #E2E8F0;line-height:1.8;">🎁 無料体験レッスン実施中 — <a href="mailto:terrybj65@msn.com" style="color:#1A3A5C;font-weight:700;">メール</a> または <a href="https://line.me/ti/p/uBFxywc-E8" style="color:#06C755;font-weight:700;">LINE</a> でご連絡を</p>
 </div>
 
 <!-- PAGE HEADER -->
@@ -434,6 +450,8 @@
   <div class="legend-item"><div class="legend-dot booked"></div>予約済み</div>
   <div class="legend-item"><div class="legend-dot empty"></div>対応時間外</div>
 </div>
+
+<p class="scroll-hint" style="text-align:center;font-size:0.75rem;color:#718096;padding:0.5rem;display:none;">← カレンダーは左右にスクロールできます</p>
 
 <!-- WEEK NAV -->
 <div class="week-nav">
@@ -523,7 +541,7 @@
 
 <!-- FOOTER -->
 <footer class="footer">
-  <p>© 2026 Eigo No Sensei · 英語の先生 · Machida, Tokyo &nbsp;|&nbsp; <a href="mailto:terry@eigonosensei.jp">terry@eigonosensei.jp</a></p>
+  <p>© 2026 Eigo No Sensei · 英語の先生 · Machida, Tokyo &nbsp;|&nbsp; <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" style="cursor:pointer;">terrybj65@msn.com</a></p>
 </footer>
 
 <!-- ADMIN TRIGGER (invisible corner button) -->
@@ -551,7 +569,7 @@
   const ADMIN_PASSWORD = 'eigo2026';
   let isAdmin = false;
   let weekOffset = 0;
-  let bookings = JSON.parse(localStorage.getItem('eigo_bookings') || '{}');
+  let bookings = {}; // in-memory only (GitHub Pages - no server storage)
   let pendingSlot = null;
 
   // Hours config
@@ -706,14 +724,14 @@
     const lesson = document.getElementById('modal-lesson').value.trim();
     if (!name) { alert('お名前を入力してください。'); return; }
     bookings[pendingSlot] = { name, lesson };
-    localStorage.setItem('eigo_bookings', JSON.stringify(bookings));
+    // bookings saved in memory
     closeModal();
     renderCalendar();
   }
 
   function confirmRemove() {
     delete bookings[pendingSlot];
-    localStorage.setItem('eigo_bookings', JSON.stringify(bookings));
+    // bookings saved in memory
     closeModal();
     renderCalendar();
   }
