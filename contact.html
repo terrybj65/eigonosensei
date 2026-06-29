@@ -3,79 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>お問い合わせ | Eigo No Sensei</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <title>お問い合わせ | Eigo No Sensei — 英語の先生</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --navy:#1A3A5C;--navy-lt:#EBF0F7;--sky:#4A90C4;--sky-lt:#EBF4FB;
-      --coral:#E8715A;--line:#06C755;--ink:#1A2535;--ink-md:#4A5568;
-      --ink-lt:#718096;--paper:#FFFFFF;--cream:#F7F9FC;--border:#E2E8F0;
-      --radius:8px;--shadow:0 2px 12px rgba(26,58,92,0.08);
-      --shadow-lg:0 8px 32px rgba(26,58,92,0.12);
-    }
-    * { box-sizing:border-box;margin:0;padding:0; }
-    body { background:var(--paper);color:var(--ink);font-family:'Noto Sans JP','Nunito',sans-serif;line-height:1.8;overflow-x:hidden; }
-
-    .top-bar { background:var(--navy);padding:0.5rem 5vw;display:flex;align-items:center;justify-content:flex-end;gap:1.5rem; }
-    .top-bar a { font-size:0.78rem;color:rgba(255,255,255,0.8);text-decoration:none;display:flex;align-items:center;gap:0.4rem; }
-    .top-bar a:hover { color:#fff; }
-    .top-bar .line-btn { background:var(--line);color:#fff;padding:0.3rem 0.9rem;border-radius:100px;font-weight:700; }
-
-    .nav { position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:3px solid var(--navy);padding:0 5vw;display:flex;align-items:center;justify-content:space-between;height:68px;box-shadow:var(--shadow); }
-    .nav-logo { display:flex;flex-direction:column;text-decoration:none;line-height:1.2; }
-    .nav-logo-en { font-family:'Nunito',sans-serif;font-size:1.1rem;font-weight:800;color:var(--navy); }
-    .nav-logo-jp { font-family:'Noto Serif JP',serif;font-size:0.72rem;color:var(--ink-lt);letter-spacing:0.15em; }
-    .nav-links { display:flex;align-items:center;gap:0.25rem;list-style:none; }
-    .nav-links a { font-size:0.85rem;font-weight:500;color:var(--ink-md);text-decoration:none;padding:0.4rem 0.75rem;border-radius:var(--radius);transition:all 0.2s; }
-    .nav-links a:hover { color:var(--navy);background:var(--navy-lt); }
-    .nav-cta { background:var(--coral)!important;color:#fff!important;font-weight:700!important;padding:0.5rem 1.25rem!important;border-radius:100px!important; }
-    .nav-line { background:var(--line)!important;color:#fff!important;font-weight:700!important;padding:0.5rem 1.25rem!important;border-radius:100px!important; }
-    .nav-hamburger { display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px; }
-    .nav-hamburger span { display:block;width:24px;height:2px;background:var(--ink);border-radius:2px; }
-    .nav-mobile { display:none;position:absolute;top:68px;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--border);padding:1rem 5vw 1.5rem;flex-direction:column;gap:0.5rem;box-shadow:var(--shadow-lg);z-index:99; }
-    .nav-mobile.open { display:flex; }
-    .nav-mobile a { font-size:0.95rem;font-weight:500;color:var(--ink-md);text-decoration:none;padding:0.75rem;border-radius:var(--radius);border-bottom:1px solid var(--border);cursor:pointer;display:block; }
-    .nav-mobile a:last-child { border-bottom:none; }
-    .nav-mobile .nav-cta,.nav-mobile .nav-line { text-align:center;border-bottom:none!important;margin-top:0.25rem; }
-
-    .page-hero { background:var(--navy);padding:3rem 5vw 2.5rem;text-align:center;position:relative;overflow:hidden; }
-    .page-hero::before { content:'連';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:'Noto Serif JP',serif;font-size:clamp(8rem,20vw,18rem);font-weight:300;color:rgba(255,255,255,0.03);pointer-events:none; }
-    .page-hero-inner { position:relative;z-index:1;max-width:700px;margin:0 auto; }
-    .page-hero-badge { display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.85);font-size:0.75rem;font-weight:700;letter-spacing:0.1em;padding:0.35rem 0.9rem;border-radius:100px;margin-bottom:1rem; }
-    .page-hero h1 { font-family:'Noto Sans JP',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:#fff;line-height:1.4;margin-bottom:0.5rem; }
-    .page-hero-sub { font-family:'Nunito',sans-serif;font-size:1rem;color:rgba(255,255,255,0.65); }
-
-    .coming-soon { max-width:600px;margin:4rem auto;padding:0 5vw;text-align:center; }
-    .coming-soon-icon { font-size:3rem;margin-bottom:1rem; }
-    .coming-soon h2 { font-family:'Noto Sans JP',sans-serif;font-size:1.4rem;font-weight:700;color:var(--navy);margin-bottom:0.75rem; }
-    .coming-soon p { font-size:0.92rem;color:var(--ink-md);line-height:1.9;margin-bottom:0.5rem; }
-    .coming-soon .divider { width:48px;height:3px;background:var(--coral);border-radius:2px;margin:1.5rem auto; }
-    .contact-btns { display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem; }
-    .btn-email { background:var(--navy);color:#fff;padding:0.85rem 1.75rem;border-radius:var(--radius);font-weight:700;font-size:0.95rem;text-decoration:none;font-family:'Nunito',sans-serif;cursor:pointer; }
-    .btn-line { background:var(--line);color:#fff;padding:0.85rem 1.75rem;border-radius:var(--radius);font-weight:700;font-size:0.95rem;text-decoration:none;font-family:'Nunito',sans-serif; }
-    .btn-home { background:var(--cream);color:var(--navy);border:1px solid var(--border);padding:0.85rem 1.75rem;border-radius:var(--radius);font-weight:700;font-size:0.95rem;text-decoration:none;font-family:'Nunito',sans-serif; }
-
-    .footer { background:var(--navy);color:rgba(255,255,255,0.55);padding:2rem 5vw;text-align:center;font-size:0.8rem;border-top:1px solid rgba(255,255,255,0.08); }
-    .footer a { color:rgba(255,255,255,0.55);text-decoration:none; }
-    .footer a:hover { color:#fff; }
-    .footer-links { display:flex;justify-content:center;gap:1.5rem;margin-bottom:0.75rem;flex-wrap:wrap; }
-
-    @media (max-width:768px) {
-      .top-bar { justify-content:center;gap:1rem; }
-      .nav-links { display:none; }
-      .nav-hamburger { display:flex; }
-    }
+    :root{--navy:#1A3A5C;--navy-lt:#EBF0F7;--navy-md:#2A5A8C;--sky:#4A90C4;--sky-lt:#EBF4FB;--coral:#E8715A;--line:#06C755;--ink:#1A2535;--ink-md:#4A5568;--ink-lt:#718096;--paper:#FFFFFF;--cream:#F7F9FC;--border:#E2E8F0;--radius:8px;--radius-lg:16px;--shadow:0 2px 12px rgba(26,58,92,0.08);--shadow-lg:0 8px 32px rgba(26,58,92,0.12);}
+    *{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+    body{background:var(--paper);color:var(--ink);font-family:'Noto Sans JP','Nunito',sans-serif;line-height:1.8;overflow-x:hidden;}
+    .top-bar{background:var(--navy);padding:0.5rem 5vw;display:flex;align-items:center;justify-content:flex-end;gap:1.5rem;}
+    .top-bar-item{font-size:0.78rem;color:rgba(255,255,255,0.8);text-decoration:none;display:flex;align-items:center;gap:0.4rem;cursor:pointer;}
+    .top-bar-item:hover{color:#fff;}.top-bar-item.line-btn{background:var(--line);color:#fff;padding:0.3rem 0.9rem;border-radius:100px;font-weight:700;}
+    .nav{position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:3px solid var(--navy);padding:0 5vw;display:flex;align-items:center;justify-content:space-between;height:68px;box-shadow:var(--shadow);}
+    .nav-logo{display:flex;flex-direction:column;text-decoration:none;line-height:1.2;}
+    .nav-logo-en{font-family:'Nunito',sans-serif;font-size:1.1rem;font-weight:800;color:var(--navy);}
+    .nav-logo-jp{font-family:'Noto Serif JP',serif;font-size:0.72rem;color:var(--ink-lt);letter-spacing:0.15em;}
+    .nav-links{display:flex;align-items:center;gap:0.25rem;list-style:none;}
+    .nav-links a{font-size:0.85rem;font-weight:500;color:var(--ink-md);text-decoration:none;padding:0.4rem 0.75rem;border-radius:var(--radius);transition:all 0.2s;}
+    .nav-links a:hover{color:var(--navy);background:var(--navy-lt);}
+    .nav-cta{background:var(--coral)!important;color:#fff!important;font-weight:700!important;padding:0.5rem 1.25rem!important;border-radius:100px!important;}
+    .nav-line{background:var(--line)!important;color:#fff!important;font-weight:700!important;padding:0.5rem 1.25rem!important;border-radius:100px!important;}
+    .nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
+    .nav-hamburger span{display:block;width:24px;height:2px;background:var(--ink);border-radius:2px;}
+    .nav-mobile{display:none;position:absolute;top:68px;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--border);padding:1rem 5vw 1.5rem;flex-direction:column;gap:0.5rem;box-shadow:var(--shadow-lg);z-index:99;}
+    .nav-mobile.open{display:flex;}
+    .nav-mobile a{font-size:0.95rem;font-weight:500;color:var(--ink-md);text-decoration:none;padding:0.75rem;border-radius:var(--radius);border-bottom:1px solid var(--border);cursor:pointer;display:block;}
+    .nav-mobile a:last-child{border-bottom:none;}
+    .nav-mobile .nav-cta,.nav-mobile .nav-line{text-align:center;border-bottom:none!important;margin-top:0.25rem;}
+    .page-hero{background:var(--navy);padding:3rem 5vw 2.5rem;text-align:center;position:relative;overflow:hidden;}
+    .page-hero::before{content:attr(data-kanji);position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:'Noto Serif JP',serif;font-size:clamp(8rem,20vw,18rem);font-weight:300;color:rgba(255,255,255,0.03);pointer-events:none;}
+    .page-hero-inner{position:relative;z-index:1;max-width:700px;margin:0 auto;}
+    .page-hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.85);font-size:0.75rem;font-weight:700;letter-spacing:0.1em;padding:0.35rem 0.9rem;border-radius:100px;margin-bottom:1rem;}
+    .page-hero h1{font-family:'Noto Sans JP',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:#fff;line-height:1.4;margin-bottom:0.5rem;}
+    .page-hero-sub{font-family:'Nunito',sans-serif;font-size:1rem;color:rgba(255,255,255,0.65);}
+    .section{max-width:960px;margin:0 auto;padding:3.5rem 5vw;}
+    .section.wide{max-width:1100px;}
+    .section.bg{background:var(--cream);border-top:1px solid var(--border);border-bottom:1px solid var(--border);max-width:100%;}
+    .section.bg .inner{max-width:960px;margin:0 auto;}
+    .section-label{display:inline-block;font-size:0.7rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--sky);background:var(--sky-lt);padding:0.25rem 0.75rem;border-radius:100px;margin-bottom:0.75rem;}
+    .section-title{font-family:'Noto Sans JP',sans-serif;font-size:clamp(1.3rem,3vw,1.9rem);font-weight:700;color:var(--navy);line-height:1.4;margin-bottom:0.4rem;}
+    .section-sub{font-size:0.88rem;color:var(--ink-lt);font-family:'Nunito',sans-serif;margin-bottom:2rem;}
+    .divider{width:48px;height:3px;background:var(--coral);border-radius:2px;margin:0.75rem 0 2rem;}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;}
+    .card{background:var(--paper);border:1px solid var(--border);border-top:3px solid var(--sky);border-radius:var(--radius);padding:1.5rem;}
+    .card-icon{font-size:1.8rem;margin-bottom:0.75rem;}
+    .card h3{font-family:'Noto Sans JP',sans-serif;font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:0.3rem;}
+    .card h3 span{display:block;font-family:'Nunito',sans-serif;font-size:0.75rem;font-weight:400;color:var(--ink-lt);margin-top:0.1rem;}
+    .card p{font-size:0.85rem;color:var(--ink-md);line-height:1.8;margin-top:0.5rem;}
+    .pricing-section{background:var(--navy);padding:3.5rem 5vw;}
+    .pricing-inner{max-width:960px;margin:0 auto;}
+    .pricing-section .section-title{color:#fff;}
+    .pricing-section .section-sub{color:rgba(255,255,255,0.6);}
+    .pricing-section .divider{background:var(--coral);}
+    .pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+    .pricing-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-lg);padding:1.5rem;text-align:center;}
+    .pricing-card.featured{background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.35);}
+    .pricing-type{font-size:0.8rem;font-weight:700;color:rgba(255,255,255,0.7);letter-spacing:0.1em;margin-bottom:0.5rem;}
+    .pricing-price{font-family:'Nunito',sans-serif;font-size:1.8rem;font-weight:800;color:#fff;}
+    .pricing-price span{font-size:0.85rem;font-weight:400;opacity:0.7;}
+    .pricing-note{font-size:0.75rem;color:rgba(255,255,255,0.55);margin-top:0.4rem;}
+    .faq-list{display:flex;flex-direction:column;gap:1rem;}
+    .faq-item{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+    .faq-q{width:100%;background:var(--cream);border:none;text-align:left;padding:1rem 1.25rem;font-family:'Noto Sans JP',sans-serif;font-size:0.92rem;font-weight:700;color:var(--navy);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;transition:background 0.2s;}
+    .faq-q:hover{background:var(--navy-lt);}
+    .faq-arrow{font-size:0.7rem;color:var(--sky);transition:transform 0.2s;flex-shrink:0;}
+    .faq-item.open .faq-arrow{transform:rotate(180deg);}
+    .faq-a{display:none;padding:1rem 1.25rem 1.25rem;font-size:0.88rem;color:var(--ink-md);line-height:1.9;background:var(--paper);border-top:1px solid var(--border);}
+    .faq-item.open .faq-a{display:block;}
+    .cta-banner{background:var(--navy);padding:3rem 5vw;text-align:center;}
+    .cta-banner h2{font-family:'Noto Sans JP',sans-serif;font-size:clamp(1.3rem,3vw,1.9rem);font-weight:700;color:#fff;margin-bottom:0.75rem;}
+    .cta-banner p{font-size:0.92rem;color:rgba(255,255,255,0.75);margin-bottom:2rem;line-height:1.9;}
+    .cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+    .btn-email{background:#fff;color:var(--navy);padding:0.9rem 2rem;border-radius:var(--radius);font-size:1rem;font-weight:700;text-decoration:none;font-family:'Nunito',sans-serif;cursor:pointer;transition:all 0.2s;}
+    .btn-email:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.15);}
+    .btn-line{background:var(--line);color:#fff;padding:0.9rem 2rem;border-radius:var(--radius);font-size:1rem;font-weight:700;text-decoration:none;font-family:'Nunito',sans-serif;transition:all 0.2s;}
+    .btn-line:hover{background:#05b34a;transform:translateY(-2px);}
+    .footer{background:var(--navy);color:rgba(255,255,255,0.55);padding:2rem 5vw;text-align:center;font-size:0.8rem;border-top:1px solid rgba(255,255,255,0.08);}
+    .footer a{color:rgba(255,255,255,0.55);text-decoration:none;}.footer a:hover{color:#fff;}
+    .footer-links{display:flex;justify-content:center;gap:1.5rem;margin-bottom:0.75rem;flex-wrap:wrap;}
+    .profile-box{display:grid;grid-template-columns:1fr 2fr;gap:2.5rem;align-items:start;}
+    .profile-img{width:100%;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);}
+    .profile-name{font-family:'Nunito',sans-serif;font-size:1.8rem;font-weight:800;color:var(--navy);margin-bottom:0.25rem;}
+    .profile-sub{font-size:0.88rem;color:var(--ink-lt);margin-bottom:1.5rem;}
+    .profile-bio p{font-size:0.9rem;color:var(--ink-md);line-height:1.9;margin-bottom:1rem;}
+    .tag-row{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;}
+    .tag{background:var(--navy-lt);color:var(--navy);font-size:0.75rem;font-weight:700;padding:0.3rem 0.75rem;border-radius:100px;}
+    @media(max-width:768px){.top-bar{justify-content:center;gap:1rem;}.nav-links{display:none;}.nav-hamburger{display:flex;}.grid-3,.grid-2{grid-template-columns:1fr;}.pricing-grid{grid-template-columns:1fr 1fr;}.profile-box{grid-template-columns:1fr;}}
   </style>
+  
 </head>
 <body>
-
 <div class="top-bar">
-  <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';">📧 メール</a>
-  <a href="https://line.me/ti/p/uBFxywc-E8" class="line-btn" onclick="">🟢 LINE</a>
+  <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="top-bar-item">📧 メール</a>
+  <a href="https://line.me/ti/p/uBFxywc-E8" class="top-bar-item line-btn" onclick="">🟢 LINEでお問い合わせ</a>
 </div>
-
 <nav class="nav">
   <a href="index.html" class="nav-logo">
     <span class="nav-logo-en">Eigo No Sensei</span>
@@ -86,7 +106,7 @@
     <li><a href="about.html" onclick="">テリーについて</a></li>
     <li><a href="schedule.html" onclick="">スケジュール・予約</a></li>
     <li><a href="faq.html" onclick="">よくある質問</a></li>
-    <li><a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" style="font-size:0.85rem;font-weight:500;color:var(--ink-md);padding:0.4rem 0.75rem;border-radius:var(--radius);text-decoration:none;cursor:pointer;">📧 メール</a></li>
+    <li><a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" style="font-size:0.85rem;font-weight:500;color:var(--ink-md);padding:0.4rem 0.75rem;border-radius:var(--radius);text-decoration:none;cursor:pointer;" onmouseover="this.style.color='var(--navy)';this.style.background='var(--navy-lt)'" onmouseout="this.style.color='var(--ink-md)';this.style.background=''">📧 メール</a></li>
     <li><a href="https://line.me/ti/p/uBFxywc-E8" class="nav-line" onclick="">LINE</a></li>
     <li><a href="free-trial.html" class="nav-cta" onclick="">無料体験レッスン</a></li>
   </ul>
@@ -105,28 +125,63 @@
   <p style="font-size:12px;color:#888;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid #E2E8F0;line-height:1.8;">🎁 無料体験レッスン実施中 — <a href="mailto:terrybj65@msn.com" style="color:#1A3A5C;font-weight:700;">メール</a> または <a href="https://line.me/ti/p/uBFxywc-E8" style="color:#06C755;font-weight:700;">LINE</a> でご連絡を</p>
 </div>
 
-<div class="page-hero">
+<div class="page-hero" data-kanji="連">
   <div class="page-hero-inner">
-    <div class="page-hero-badge">📩 ご連絡</div>
+    <div class="page-hero-badge">📩 お問い合わせ</div>
     <h1>お問い合わせ</h1>
-    <p class="page-hero-sub">Contact Terry</p>
+    <p class="page-hero-sub">Contact Terry — Japanese or English welcome</p>
   </div>
 </div>
 
-<div class="coming-soon">
-  <div class="coming-soon-icon">🚧</div>
-  <h2>このページは準備中です</h2>
-  <p>お問い合わせはメールまたはLINEでどうぞ。</p>
-  <p style="font-size:0.85rem;color:var(--ink-lt);">Please contact Terry directly by email or LINE.<br>Please check back soon!</p>
+<div class="section">
+  <span class="section-label">連絡方法</span>
+  <h2 class="section-title">メールまたはLINEでどうぞ</h2>
+  <p class="section-sub">Feel free to reach out — Terry replies within 24 hours</p>
   <div class="divider"></div>
-  <p style="font-size:0.88rem;color:var(--ink-md);">ご質問はメールまたはLINEでお気軽にどうぞ。<br><span style="font-size:0.82rem;color:var(--ink-lt);">In the meantime, feel free to contact Terry directly.</span></p>
-  <div class="contact-btns">
-    <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="btn-email">📧 メールで問い合わせる</a>
-    <a href="https://line.me/ti/p/uBFxywc-E8" class="btn-line" onclick="">🟢 LINEで問い合わせる</a>
-    <a href="index.html" class="btn-home" onclick="">← ホームへ戻る</a>
+  <div class="grid-2">
+
+    <div class="card" style="border-top-color:var(--navy);">
+      <div class="card-icon">📧</div>
+      <h3>メールでお問い合わせ<span>Email Terry directly</span></h3>
+      <p>ご質問・ご予約はメールでどうぞ。24時間以内に返信します。日本語・英語どちらでも大丈夫です。</p>
+      <p style="font-size:0.85rem;font-weight:700;color:var(--navy);margin:0.75rem 0 0.25rem;">terrybj65@msn.com</p>
+      <p style="font-size:0.78rem;color:var(--ink-lt);">件名に「レッスン」「体験」などとお書きください。<br><em>Subject: "Lesson" or "Trial lesson"</em></p>
+      <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" style="display:block;margin-top:1.25rem;padding:0.85rem;text-align:center;background:var(--navy);color:#fff;font-weight:700;border-radius:var(--radius);text-decoration:none;font-family:'Nunito',sans-serif;cursor:pointer;">📧 メールを送る</a>
+    </div>
+
+    <div class="card" style="border-top-color:#06C755;">
+      <div class="card-icon">🟢</div>
+      <h3>LINEでお問い合わせ<span>Message on LINE</span></h3>
+      <p>LINEからのメッセージも大歓迎です。気軽にメッセージをどうぞ。日本語・英語どちらでも構いません。</p>
+      <p style="font-size:0.85rem;font-weight:700;color:var(--navy);margin:0.75rem 0 0.25rem;">LINE ID: uBFxywc-E8</p>
+      <p style="font-size:0.78rem;color:var(--ink-lt);">「レッスンについて聞きたい」とメッセージいただければOK！<br><em>Just say "I'd like to know about lessons"</em></p>
+      <a href="https://line.me/ti/p/uBFxywc-E8" onclick="" style="display:block;margin-top:1.25rem;padding:0.85rem;text-align:center;background:#06C755;color:#fff;font-weight:700;border-radius:var(--radius);text-decoration:none;font-family:'Nunito',sans-serif;">🟢 LINEで連絡する</a>
+    </div>
+
   </div>
 </div>
 
+<div class="section bg">
+  <div class="inner">
+    <span class="section-label">よくある問い合わせ内容</span>
+    <h2 class="section-title">こんなことでもお気軽に</h2>
+    <div class="divider"></div>
+    <div class="grid-3">
+      <div class="card"><div class="card-icon">🆓</div><h3>体験レッスンの予約<span>Book a free trial</span></h3><p>「無料体験レッスンを受けたい」と一言でOKです。日程・場所を一緒に決めましょう。</p></div>
+      <div class="card"><div class="card-icon">📅</div><h3>レッスンの予約・変更<span>Lesson booking</span></h3><p>新規予約、日程変更、キャンセルなどもメール・LINEでお気軽にどうぞ。</p></div>
+      <div class="card"><div class="card-icon">❓</div><h3>料金・内容の確認<span>Questions about lessons</span></h3><p>料金、レッスン内容、場所など、不明な点は何でも聞いてください。</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-banner">
+  <h2>まずはご連絡ください。</h2>
+  <p>「体験レッスン希望」とメッセージいただければOK！<br>日本語でも英語でも、お気軽にどうぞ。</p>
+  <div class="cta-btns">
+    <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="btn-email">📧 メールで申し込む</a>
+    <a href="https://line.me/ti/p/uBFxywc-E8" class="btn-line" onclick="">🟢 LINEで申し込む</a>
+  </div>
+</div>
 <footer class="footer">
   <div class="footer-links">
     <a href="lessons.html" onclick="">レッスン内容</a>
@@ -137,7 +192,6 @@
   </div>
   <p>© 2026 Eigo No Sensei · 英語の先生 · Machida, Tokyo &nbsp;|&nbsp; <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" style="cursor:pointer;">メール</a> &nbsp;|&nbsp; <a href="https://line.me/ti/p/uBFxywc-E8" onclick="">LINE</a></p>
 </footer>
-
 <script>
   document.addEventListener('click', function(e) {
     const nav = document.querySelector('.nav-mobile');
@@ -147,6 +201,5 @@
     }
   });
 </script>
-
 </body>
 </html>
