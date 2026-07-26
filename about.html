@@ -88,13 +88,26 @@
     .tag-row{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;}
     .tag{background:var(--navy-lt);color:var(--navy);font-size:0.75rem;font-weight:700;padding:0.3rem 0.75rem;border-radius:100px;}
     @media(max-width:768px){.top-bar{justify-content:center;gap:1rem;}.nav-links{display:none;}.nav-hamburger{display:flex;}.grid-3,.grid-2{grid-template-columns:1fr;}.pricing-grid{grid-template-columns:1fr 1fr;}.profile-box{grid-template-columns:1fr;}}
+
+    /* ── LANGUAGE TOGGLE ── */
+    .lang-switch{display:flex;gap:2px;background:rgba(255,255,255,0.12);border-radius:100px;padding:2px;}
+    .lang-btn{background:none;border:none;color:rgba(255,255,255,0.65);font-size:0.72rem;font-weight:700;padding:0.25rem 0.65rem;border-radius:100px;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.15s;}
+    .lang-btn.active{background:#fff;color:var(--navy);}
+    [lang-tag="ja"]{display:inline;}
+    [lang-tag="en"]{display:none;}
+    html.lang-en [lang-tag="ja"]{display:none;}
+    html.lang-en [lang-tag="en"]{display:inline;}
   </style>
   
 </head>
 <body>
 <div class="top-bar">
-  <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="top-bar-item">📧 メール</a>
-  <a href="https://line.me/ti/p/uBFxywc-E8" class="top-bar-item line-btn" onclick="">🟢 LINEでお問い合わせ</a>
+  <div class="lang-switch">
+    <button class="lang-btn active" data-lang="ja" onclick="setLang('ja')">日本語</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+  </div>
+    <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="top-bar-item"><span lang-tag="ja">📧 メール</span><span lang-tag="en">📧 Email</span></a>
+  <a href="https://line.me/ti/p/uBFxywc-E8" class="top-bar-item line-btn" onclick=""><span lang-tag="ja">🟢 LINEでお問い合わせ</span><span lang-tag="en">🟢 Message on LINE</span></a>
 </div>
 <nav class="nav">
   <a href="index.html" class="nav-logo">
@@ -102,33 +115,33 @@
     <span class="nav-logo-jp">英 語 の 先 生</span>
   </a>
   <ul class="nav-links">
-    <li><a href="lessons.html" onclick="">レッスン内容</a></li>
-    <li><a href="about.html" onclick="">テリーについて</a></li>
-    <li><a href="schedule.html" onclick="">スケジュール・予約</a></li>
-    <li><a href="faq.html" onclick="">よくある質問</a></li>
-    <li><a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" style="font-size:0.85rem;font-weight:500;color:var(--ink-md);padding:0.4rem 0.75rem;border-radius:var(--radius);text-decoration:none;cursor:pointer;" onmouseover="this.style.color='var(--navy)';this.style.background='var(--navy-lt)'" onmouseout="this.style.color='var(--ink-md)';this.style.background=''">📧 メール</a></li>
+    <li><a href="lessons.html" onclick=""><span lang-tag="ja">レッスン内容</span><span lang-tag="en">Lessons</span></a></li>
+    <li><a href="about.html" onclick=""><span lang-tag="ja">テリーについて</span><span lang-tag="en">About Terry</span></a></li>
+    <li><a href="schedule.html" onclick=""><span lang-tag="ja">スケジュール・予約</span><span lang-tag="en">Schedule &amp; Booking</span></a></li>
+    <li><a href="faq.html" onclick=""><span lang-tag="ja">よくある質問</span><span lang-tag="en">FAQ</span></a></li>
+    <li><a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" style="font-size:0.85rem;font-weight:500;color:var(--ink-md);padding:0.4rem 0.75rem;border-radius:var(--radius);text-decoration:none;cursor:pointer;" onmouseover="this.style.color='var(--navy)';this.style.background='var(--navy-lt)'" onmouseout="this.style.color='var(--ink-md)';this.style.background=''"><span lang-tag="ja">📧 メール</span><span lang-tag="en">📧 Email</span></a></li>
     <li><a href="https://line.me/ti/p/uBFxywc-E8" class="nav-line" onclick="">LINE</a></li>
-    <li><a href="free-trial.html" class="nav-cta" onclick="">無料体験レッスン</a></li>
+    <li><a href="free-trial.html" class="nav-cta" onclick=""><span lang-tag="ja">無料体験レッスン</span><span lang-tag="en">Free Trial Lesson</span></a></li>
   </ul>
   <button class="nav-hamburger" onclick="document.querySelector('.nav-mobile').classList.toggle('open')" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 <div class="nav-mobile">
-  <a href="index.html" onclick="">ホーム</a>
-  <a href="lessons.html" onclick="">レッスン内容</a>
-  <a href="about.html" onclick="">テリーについて</a>
-  <a href="schedule.html" onclick="">スケジュール・予約</a>
-  <a href="faq.html" onclick="">よくある質問</a>
-  <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="nav-cta" style="cursor:pointer;">📧 メールでお問い合わせ</a>
-  <a href="https://line.me/ti/p/uBFxywc-E8" class="nav-line" onclick="">🟢 LINEでお問い合わせ</a>
-  <p style="font-size:12px;color:#888;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid #E2E8F0;line-height:1.8;">🎁 無料体験レッスン実施中 — <a href="mailto:terrybj65@msn.com" style="color:#1A3A5C;font-weight:700;">メール</a> または <a href="https://line.me/ti/p/uBFxywc-E8" style="color:#06C755;font-weight:700;">LINE</a> でご連絡を</p>
+  <a href="index.html" onclick=""><span lang-tag="ja">ホーム</span><span lang-tag="en">Home</span></a>
+  <a href="lessons.html" onclick=""><span lang-tag="ja">レッスン内容</span><span lang-tag="en">Lessons</span></a>
+  <a href="about.html" onclick=""><span lang-tag="ja">テリーについて</span><span lang-tag="en">About Terry</span></a>
+  <a href="schedule.html" onclick=""><span lang-tag="ja">スケジュール・予約</span><span lang-tag="en">Schedule &amp; Booking</span></a>
+  <a href="faq.html" onclick=""><span lang-tag="ja">よくある質問</span><span lang-tag="en">FAQ</span></a>
+  <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="nav-cta" style="cursor:pointer;"><span lang-tag="ja">📧 メールでお問い合わせ</span><span lang-tag="en">📧 Email Terry</span></a>
+  <a href="https://line.me/ti/p/uBFxywc-E8" class="nav-line" onclick=""><span lang-tag="ja">🟢 LINEでお問い合わせ</span><span lang-tag="en">🟢 Message on LINE</span></a>
+  <p style="font-size:12px;color:#888;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid #E2E8F0;line-height:1.8;"><span lang-tag="ja">🎁 無料体験レッスン実施中 — <a href="mailto:terrybj65@msn.com" style="color:#1A3A5C;font-weight:700;">メール</a> または <a href="https://line.me/ti/p/uBFxywc-E8" style="color:#06C755;font-weight:700;">LINE</a> でご連絡を</span><span lang-tag="en">🎁 Free trial lessons available — contact via <a href="mailto:terrybj65@msn.com" style="color:#1A3A5C;font-weight:700;">Email</a> or <a href="https://line.me/ti/p/uBFxywc-E8" style="color:#06C755;font-weight:700;">LINE</a></span></p>
 </div>
 
 <div class="page-hero" data-kanji="人">
   <div class="page-hero-inner">
-    <div class="page-hero-badge">👋 テリーについて</div>
-    <h1>講師紹介</h1>
+    <div class="page-hero-badge"><span lang-tag="ja">👋 テリーについて</span><span lang-tag="en">👋 About Terry</span></div>
+    <h1><span lang-tag="ja">講師紹介</span><span lang-tag="en">Meet Your Teacher</span></h1>
     <p class="page-hero-sub">About Terry — your native English teacher in Machida</p>
   </div>
 </div>
@@ -140,18 +153,17 @@
     </div>
     <div class="profile-bio">
       <div class="profile-name">Terry B. Johnson</div>
-      <div class="profile-sub">ネイティブ英語講師 · 町田在住27年 / Native English teacher · 27 years in Machida</div>
-      <p>アメリカ人のテリーは、英語ネイティブスピーカーとして、27年以上にわたって町田・相模原エリアで英語を教えています。英語を母国語とするプロの講師として、初心者から上級者まで幅広いレベルの生徒を指導してきました。</p>
-      <p>Terry is an American native English speaker who has been living and teaching in the Machida area for over 27 years. With extensive experience teaching students of all levels and backgrounds, Terry brings a relaxed, encouraging approach to every lesson.</p>
-      <p>テリーのレッスンは、暗記ではなく「実際に使える英語」を身につけることに重点を置いています。楽しく、自然な英語力を育てることが目標です。</p>
+      <div class="profile-sub"><span lang-tag="ja">ネイティブ英語講師 · 町田在住27年</span><span lang-tag="en">Native English teacher · 27 years in Machida</span></div>
+      <p><span lang-tag="ja">アメリカ人のテリーは、英語ネイティブスピーカーとして、27年以上にわたって町田・相模原エリアで英語を教えています。英語を母国語とするプロの講師として、初心者から上級者まで幅広いレベルの生徒を指導してきました。</span><span lang-tag="en">Terry is an American native English speaker who has been living and teaching in the Machida area for over 27 years. With extensive experience teaching students of all levels and backgrounds, Terry brings a relaxed, encouraging approach to every lesson.</span></p>
+      <p><span lang-tag="ja">テリーのレッスンは、暗記ではなく「実際に使える英語」を身につけることに重点を置いています。楽しく、自然な英語力を育てることが目標です。</span><span lang-tag="en">Terry's lessons focus on English you can actually use in real life, not just memorization. The goal is to build natural, confident English skills while enjoying the process.</span></p>
       <div class="tag-row">
-        <span class="tag">🇺🇸 アメリカ人</span>
-        <span class="tag">📍 町田在住27年</span>
-        <span class="tag">🎓 豊富な指導経験</span>
-        <span class="tag">💬 日常会話</span>
-        <span class="tag">💼 ビジネス英語</span>
-        <span class="tag">🎯 試験対策</span>
-        <span class="tag">🌏 旅行英語</span>
+        <span class="tag"><span lang-tag="ja">🇺🇸 アメリカ人</span><span lang-tag="en">🇺🇸 American</span></span>
+        <span class="tag"><span lang-tag="ja">📍 町田在住27年</span><span lang-tag="en">📍 27 years in Machida</span></span>
+        <span class="tag"><span lang-tag="ja">🎓 豊富な指導経験</span><span lang-tag="en">🎓 Extensive teaching experience</span></span>
+        <span class="tag"><span lang-tag="ja">💬 日常会話</span><span lang-tag="en">💬 Everyday conversation</span></span>
+        <span class="tag"><span lang-tag="ja">💼 ビジネス英語</span><span lang-tag="en">💼 Business English</span></span>
+        <span class="tag"><span lang-tag="ja">🎯 試験対策</span><span lang-tag="en">🎯 Exam prep</span></span>
+        <span class="tag"><span lang-tag="ja">🌏 旅行英語</span><span lang-tag="en">🌏 Travel English</span></span>
       </div>
     </div>
   </div>
@@ -159,40 +171,55 @@
 
 <div class="section bg">
   <div class="inner">
-    <span class="section-label">テリーのスタイル</span>
-    <h2 class="section-title">なぜテリーを選ぶの？</h2>
+    <span class="section-label"><span lang-tag="ja">テリーのスタイル</span><span lang-tag="en">Terry's style</span></span>
+    <h2 class="section-title"><span lang-tag="ja">なぜテリーを選ぶの？</span><span lang-tag="en">Why choose Terry?</span></h2>
     <p class="section-sub">Why choose Terry?</p>
     <div class="divider"></div>
     <div class="grid-3">
-      <div class="card"><div class="card-icon">😊</div><h3>リラックスできる環境<span>Relaxed atmosphere</span></h3><p>英語が苦手でも大丈夫。テリーのレッスンは、プレッシャーなくリラックスして学べる環境を大切にしています。</p></div>
-      <div class="card"><div class="card-icon">🎯</div><h3>あなたの目標に合わせる<span>Tailored to your goals</span></h3><p>一人ひとりの目標やレベルに合わせたレッスンを提供します。あなたが必要なことだけに集中します。</p></div>
-      <div class="card"><div class="card-icon">🌐</div><h3>本物のネイティブ英語<span>Real native English</span></h3><p>アメリカ人ネイティブスピーカーから、自然な発音・表現・スラングまで学べます。</p></div>
-      <div class="card"><div class="card-icon">📍</div><h3>地域に根ざした27年<span>27 years local experience</span></h3><p>町田・相模原エリアのことをよく知っており、地域の生活に密着したレッスンが可能です。</p></div>
-      <div class="card"><div class="card-icon">🗓️</div><h3>柔軟なスケジュール<span>Flexible scheduling</span></h3><p>カフェ・自宅・オンラインで対応。あなたのライフスタイルに合わせてレッスンを組み立てます。</p></div>
-      <div class="card"><div class="card-icon">🆓</div><h3>無料体験レッスン<span>Free 30-min trial</span></h3><p>初めての方は30分の無料体験レッスンから始められます。相性を確認してから始められるので安心です。</p></div>
+      <div class="card"><div class="card-icon">😊</div><h3><span lang-tag="ja">リラックスできる環境</span><span lang-tag="en">Relaxed atmosphere</span></h3><p><span lang-tag="ja">英語が苦手でも大丈夫。テリーのレッスンは、プレッシャーなくリラックスして学べる環境を大切にしています。</span><span lang-tag="en">Don't worry if English feels difficult — Terry's lessons focus on a relaxed, pressure-free environment where you can learn at your own pace.</span></p></div>
+      <div class="card"><div class="card-icon">🎯</div><h3><span lang-tag="ja">あなたの目標に合わせる</span><span lang-tag="en">Tailored to your goals</span></h3><p><span lang-tag="ja">一人ひとりの目標やレベルに合わせたレッスンを提供します。あなたが必要なことだけに集中します。</span><span lang-tag="en">Every lesson is built around your own goals and level, so you spend time only on what actually matters to you.</span></p></div>
+      <div class="card"><div class="card-icon">🌐</div><h3><span lang-tag="ja">本物のネイティブ英語</span><span lang-tag="en">Real native English</span></h3><p><span lang-tag="ja">アメリカ人ネイティブスピーカーから、自然な発音・表現・スラングまで学べます。</span><span lang-tag="en">Learn natural pronunciation, expressions, and even slang directly from an American native speaker.</span></p></div>
+      <div class="card"><div class="card-icon">📍</div><h3><span lang-tag="ja">地域に根ざした27年</span><span lang-tag="en">27 years local experience</span></h3><p><span lang-tag="ja">町田・相模原エリアのことをよく知っており、地域の生活に密着したレッスンが可能です。</span><span lang-tag="en">Terry knows the Machida and Sagamihara area well, so lessons stay grounded in everyday local life.</span></p></div>
+      <div class="card"><div class="card-icon">🗓️</div><h3><span lang-tag="ja">柔軟なスケジュール</span><span lang-tag="en">Flexible scheduling</span></h3><p><span lang-tag="ja">カフェ・自宅・オンラインで対応。あなたのライフスタイルに合わせてレッスンを組み立てます。</span><span lang-tag="en">Café, home, or online — lessons are built around whatever fits your lifestyle.</span></p></div>
+      <div class="card"><div class="card-icon">🆓</div><h3><span lang-tag="ja">無料体験レッスン</span><span lang-tag="en">Free 30-min trial</span></h3><p><span lang-tag="ja">初めての方は30分の無料体験レッスンから始められます。相性を確認してから始められるので安心です。</span><span lang-tag="en">First-timers can start with a free 30-minute trial lesson — a low-pressure way to see if it's a good fit before committing.</span></p></div>
     </div>
   </div>
 </div>
 
 <div class="cta-banner">
-  <h2>テリーと話してみませんか？</h2>
-  <p>30分の無料体験レッスンで、テリーのレッスンスタイルを体験してみてください。</p>
+  <h2><span lang-tag="ja">テリーと話してみませんか？</span><span lang-tag="en">Ready to talk with Terry?</span></h2>
+  <p><span lang-tag="ja">30分の無料体験レッスンで、テリーのレッスンスタイルを体験してみてください。</span><span lang-tag="en">Try a free 30-minute trial lesson and see Terry's teaching style for yourself.</span></p>
   <div class="cta-btns">
-    <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="btn-email">📧 メールで問い合わせる</a>
-    <a href="https://line.me/ti/p/uBFxywc-E8" class="btn-line" onclick="">🟢 LINEで問い合わせる</a>
+    <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="btn-email"><span lang-tag="ja">📧 メールで問い合わせる</span><span lang-tag="en">📧 Contact by Email</span></a>
+    <a href="https://line.me/ti/p/uBFxywc-E8" class="btn-line" onclick=""><span lang-tag="ja">🟢 LINEで問い合わせる</span><span lang-tag="en">🟢 Contact on LINE</span></a>
   </div>
 </div>
 <footer class="footer">
   <div class="footer-links">
-    <a href="lessons.html" onclick="">レッスン内容</a>
-    <a href="about.html" onclick="">テリーについて</a>
-    <a href="schedule.html" onclick="">スケジュール・予約</a>
-    <a href="faq.html" onclick="">よくある質問</a>
-    <a href="free-trial.html" onclick="">無料体験レッスン</a>
+    <a href="lessons.html" onclick=""><span lang-tag="ja">レッスン内容</span><span lang-tag="en">Lessons</span></a>
+    <a href="about.html" onclick=""><span lang-tag="ja">テリーについて</span><span lang-tag="en">About Terry</span></a>
+    <a href="schedule.html" onclick=""><span lang-tag="ja">スケジュール・予約</span><span lang-tag="en">Schedule &amp; Booking</span></a>
+    <a href="faq.html" onclick=""><span lang-tag="ja">よくある質問</span><span lang-tag="en">FAQ</span></a>
+    <a href="free-trial.html" onclick=""><span lang-tag="ja">無料体験レッスン</span><span lang-tag="en">Free Trial Lesson</span></a>
   </div>
-  <p>© 2026 Eigo No Sensei · 英語の先生 · Machida, Tokyo &nbsp;|&nbsp; <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" style="cursor:pointer;">メール</a> &nbsp;|&nbsp; <a href="https://line.me/ti/p/uBFxywc-E8" onclick="">LINE</a></p>
+  <p>© 2026 Eigo No Sensei · 英語の先生 · Machida, Tokyo &nbsp;|&nbsp; <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" style="cursor:pointer;"><span lang-tag="ja">メール</span><span lang-tag="en">Email</span></a> &nbsp;|&nbsp; <a href="https://line.me/ti/p/uBFxywc-E8" onclick="">LINE</a></p>
 </footer>
 <script>
+
+  function setLang(lang){
+    document.documentElement.classList.toggle('lang-en', lang === 'en');
+    document.documentElement.setAttribute('lang', lang);
+    document.querySelectorAll('.lang-btn').forEach(function(b){
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    try { localStorage.setItem('eigoLang', lang); } catch(e){}
+  }
+  (function(){
+    var saved = 'ja';
+    try { saved = localStorage.getItem('eigoLang') || 'ja'; } catch(e){}
+    setLang(saved);
+  })();
+
   document.addEventListener('click', function(e) {
     const nav = document.querySelector('.nav-mobile');
     const btn = document.querySelector('.nav-hamburger');
