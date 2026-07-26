@@ -88,13 +88,26 @@
     .tag-row{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;}
     .tag{background:var(--navy-lt);color:var(--navy);font-size:0.75rem;font-weight:700;padding:0.3rem 0.75rem;border-radius:100px;}
     @media(max-width:768px){.top-bar{justify-content:center;gap:1rem;}.nav-links{display:none;}.nav-hamburger{display:flex;}.grid-3,.grid-2{grid-template-columns:1fr;}.pricing-grid{grid-template-columns:1fr 1fr;}.profile-box{grid-template-columns:1fr;}}
+
+    /* ── LANGUAGE TOGGLE ── */
+    .lang-switch{display:flex;gap:2px;background:rgba(255,255,255,0.12);border-radius:100px;padding:2px;}
+    .lang-btn{background:none;border:none;color:rgba(255,255,255,0.65);font-size:0.72rem;font-weight:700;padding:0.25rem 0.65rem;border-radius:100px;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.15s;}
+    .lang-btn.active{background:#fff;color:var(--navy);}
+    [lang-tag="ja"]{display:inline;}
+    [lang-tag="en"]{display:none;}
+    html.lang-en [lang-tag="ja"]{display:none;}
+    html.lang-en [lang-tag="en"]{display:inline;}
   </style>
   
 </head>
 <body>
 <div class="top-bar">
-  <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="top-bar-item">📧 メール</a>
-  <a href="https://line.me/ti/p/uBFxywc-E8" class="top-bar-item line-btn" onclick="">🟢 LINEでお問い合わせ</a>
+  <div class="lang-switch">
+    <button class="lang-btn active" data-lang="ja" onclick="setLang('ja')">日本語</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+  </div>
+    <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="top-bar-item"><span lang-tag="ja">📧 メール</span><span lang-tag="en">📧 Email</span></a>
+  <a href="https://line.me/ti/p/uBFxywc-E8" class="top-bar-item line-btn" onclick=""><span lang-tag="ja">🟢 LINEでお問い合わせ</span><span lang-tag="en">🟢 Message on LINE</span></a>
 </div>
 <nav class="nav">
   <a href="index.html" class="nav-logo">
@@ -102,117 +115,132 @@
     <span class="nav-logo-jp">英 語 の 先 生</span>
   </a>
   <ul class="nav-links">
-    <li><a href="lessons.html" onclick="">レッスン内容</a></li>
-    <li><a href="about.html" onclick="">テリーについて</a></li>
-    <li><a href="schedule.html" onclick="">スケジュール・予約</a></li>
-    <li><a href="faq.html" onclick="">よくある質問</a></li>
-    <li><a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" style="font-size:0.85rem;font-weight:500;color:var(--ink-md);padding:0.4rem 0.75rem;border-radius:var(--radius);text-decoration:none;cursor:pointer;" onmouseover="this.style.color='var(--navy)';this.style.background='var(--navy-lt)'" onmouseout="this.style.color='var(--ink-md)';this.style.background=''">📧 メール</a></li>
+    <li><a href="lessons.html" onclick=""><span lang-tag="ja">レッスン内容</span><span lang-tag="en">Lessons</span></a></li>
+    <li><a href="about.html" onclick=""><span lang-tag="ja">テリーについて</span><span lang-tag="en">About Terry</span></a></li>
+    <li><a href="schedule.html" onclick=""><span lang-tag="ja">スケジュール・予約</span><span lang-tag="en">Schedule &amp; Booking</span></a></li>
+    <li><a href="faq.html" onclick=""><span lang-tag="ja">よくある質問</span><span lang-tag="en">FAQ</span></a></li>
+    <li><a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" style="font-size:0.85rem;font-weight:500;color:var(--ink-md);padding:0.4rem 0.75rem;border-radius:var(--radius);text-decoration:none;cursor:pointer;" onmouseover="this.style.color='var(--navy)';this.style.background='var(--navy-lt)'" onmouseout="this.style.color='var(--ink-md)';this.style.background=''"><span lang-tag="ja">📧 メール</span><span lang-tag="en">📧 Email</span></a></li>
     <li><a href="https://line.me/ti/p/uBFxywc-E8" class="nav-line" onclick="">LINE</a></li>
-    <li><a href="free-trial.html" class="nav-cta" onclick="">無料体験レッスン</a></li>
+    <li><a href="free-trial.html" class="nav-cta" onclick=""><span lang-tag="ja">無料体験レッスン</span><span lang-tag="en">Free Trial Lesson</span></a></li>
   </ul>
   <button class="nav-hamburger" onclick="document.querySelector('.nav-mobile').classList.toggle('open')" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 <div class="nav-mobile">
-  <a href="index.html" onclick="">ホーム</a>
-  <a href="lessons.html" onclick="">レッスン内容</a>
-  <a href="about.html" onclick="">テリーについて</a>
-  <a href="schedule.html" onclick="">スケジュール・予約</a>
-  <a href="faq.html" onclick="">よくある質問</a>
-  <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="nav-cta" style="cursor:pointer;">📧 メールでお問い合わせ</a>
-  <a href="https://line.me/ti/p/uBFxywc-E8" class="nav-line" onclick="">🟢 LINEでお問い合わせ</a>
-  <p style="font-size:12px;color:#888;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid #E2E8F0;line-height:1.8;">🎁 無料体験レッスン実施中 — <a href="mailto:terrybj65@msn.com" style="color:#1A3A5C;font-weight:700;">メール</a> または <a href="https://line.me/ti/p/uBFxywc-E8" style="color:#06C755;font-weight:700;">LINE</a> でご連絡を</p>
+  <a href="index.html" onclick=""><span lang-tag="ja">ホーム</span><span lang-tag="en">Home</span></a>
+  <a href="lessons.html" onclick=""><span lang-tag="ja">レッスン内容</span><span lang-tag="en">Lessons</span></a>
+  <a href="about.html" onclick=""><span lang-tag="ja">テリーについて</span><span lang-tag="en">About Terry</span></a>
+  <a href="schedule.html" onclick=""><span lang-tag="ja">スケジュール・予約</span><span lang-tag="en">Schedule &amp; Booking</span></a>
+  <a href="faq.html" onclick=""><span lang-tag="ja">よくある質問</span><span lang-tag="en">FAQ</span></a>
+  <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="nav-cta" style="cursor:pointer;"><span lang-tag="ja">📧 メールでお問い合わせ</span><span lang-tag="en">📧 Email Terry</span></a>
+  <a href="https://line.me/ti/p/uBFxywc-E8" class="nav-line" onclick=""><span lang-tag="ja">🟢 LINEでお問い合わせ</span><span lang-tag="en">🟢 Message on LINE</span></a>
+  <p style="font-size:12px;color:#888;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid #E2E8F0;line-height:1.8;"><span lang-tag="ja">🎁 無料体験レッスン実施中 — <a href="mailto:terrybj65@msn.com" style="color:#1A3A5C;font-weight:700;">メール</a> または <a href="https://line.me/ti/p/uBFxywc-E8" style="color:#06C755;font-weight:700;">LINE</a> でご連絡を</span><span lang-tag="en">🎁 Free trial lessons available — contact via <a href="mailto:terrybj65@msn.com" style="color:#1A3A5C;font-weight:700;">Email</a> or <a href="https://line.me/ti/p/uBFxywc-E8" style="color:#06C755;font-weight:700;">LINE</a></span></p>
 </div>
 
 <div class="page-hero" data-kanji="学">
   <div class="page-hero-inner">
-    <div class="page-hero-badge">📚 レッスン内容</div>
-    <h1>あなたに合ったレッスンを</h1>
+    <div class="page-hero-badge"><span lang-tag="ja">📚 レッスン内容</span><span lang-tag="en">📚 Lessons</span></div>
+    <h1><span lang-tag="ja">あなたに合ったレッスンを</span><span lang-tag="en">Lessons Built Around You</span></h1>
     <p class="page-hero-sub">Flexible lessons for every level and goal</p>
   </div>
 </div>
 
 <div class="section wide">
-  <span class="section-label">レッスン種類</span>
-  <h2 class="section-title">どんな英語を学びたいですか？</h2>
+  <span class="section-label"><span lang-tag="ja">レッスン種類</span><span lang-tag="en">Lesson types</span></span>
+  <h2 class="section-title"><span lang-tag="ja">どんな英語を学びたいですか？</span><span lang-tag="en">What kind of English do you want to learn?</span></h2>
   <p class="section-sub">What do you want to learn?</p>
   <div class="divider"></div>
   <div class="grid-3">
-    <div class="card"><div class="card-icon">💬</div><h3>日常英会話<span>Everyday conversation</span></h3><p>挨拶、買い物、旅行、職場などの場面で自信を持って話せるようになりましょう。初心者から中上級者まで対応します。</p></div>
-    <div class="card"><div class="card-icon">💼</div><h3>ビジネス英語<span>Business English</span></h3><p>会議、メール、プレゼン、電話対応など、職場で使える実践的なビジネス英語を習得しましょう。</p></div>
-    <div class="card"><div class="card-icon">🎯</div><h3>試験対策<span>Exam preparation</span></h3><p>TOEIC・TOEFL・英検など各種試験の対策を、テリーが丁寧にサポートします。目標スコア達成を目指しましょう。</p></div>
-    <div class="card"><div class="card-icon">🌏</div><h3>旅行英語<span>Travel English</span></h3><p>海外旅行で役立つ英語を学びましょう。ホテルのチェックイン、レストランの注文、道案内など実践的なフレーズを習得。</p></div>
-    <div class="card"><div class="card-icon">📖</div><h3>読み書き<span>Reading & writing</span></h3><p>英語のメール・レポート・ブログなど、書く力を高めたい方に。読解力も合わせて向上させます。</p></div>
-    <div class="card"><div class="card-icon">🗣️</div><h3>フリー会話<span>Free conversation</span></h3><p>テーマを決めず、自由に話しましょう。英語を「使う」楽しさを体感しながら、自然な表現力を身につけます。</p></div>
+    <div class="card"><div class="card-icon">💬</div><h3><span lang-tag="ja">日常英会話</span><span lang-tag="en">Everyday conversation</span></h3><p><span lang-tag="ja">挨拶、買い物、旅行、職場などの場面で自信を持って話せるようになりましょう。初心者から中上級者まで対応します。</span><span lang-tag="en">Build the confidence to speak in everyday situations — greetings, shopping, travel, the workplace. Suitable from beginner through upper-intermediate.</span></p></div>
+    <div class="card"><div class="card-icon">💼</div><h3><span lang-tag="ja">ビジネス英語</span><span lang-tag="en">Business English</span></h3><p><span lang-tag="ja">会議、メール、プレゼン、電話対応など、職場で使える実践的なビジネス英語を習得しましょう。</span><span lang-tag="en">Practical business English for meetings, emails, presentations, and phone calls — the kind you'll actually use at work.</span></p></div>
+    <div class="card"><div class="card-icon">🎯</div><h3><span lang-tag="ja">試験対策</span><span lang-tag="en">Exam preparation</span></h3><p><span lang-tag="ja">TOEIC・TOEFL・英検など各種試験の対策を、テリーが丁寧にサポートします。目標スコア達成を目指しましょう。</span><span lang-tag="en">Careful, thorough support for TOEIC, TOEFL, Eiken, and other exams — let's work toward your target score together.</span></p></div>
+    <div class="card"><div class="card-icon">🌏</div><h3><span lang-tag="ja">旅行英語</span><span lang-tag="en">Travel English</span></h3><p><span lang-tag="ja">海外旅行で役立つ英語を学びましょう。ホテルのチェックイン、レストランの注文、道案内など実践的なフレーズを習得。</span><span lang-tag="en">Useful English for traveling abroad — hotel check-in, ordering at restaurants, asking for directions, and other practical phrases.</span></p></div>
+    <div class="card"><div class="card-icon">📖</div><h3><span lang-tag="ja">読み書き</span><span lang-tag="en">Reading &amp; writing</span></h3><p><span lang-tag="ja">英語のメール・レポート・ブログなど、書く力を高めたい方に。読解力も合わせて向上させます。</span><span lang-tag="en">For anyone wanting to strengthen their writing — emails, reports, blog posts — while building reading comprehension alongside it.</span></p></div>
+    <div class="card"><div class="card-icon">🗣️</div><h3><span lang-tag="ja">フリー会話</span><span lang-tag="en">Free conversation</span></h3><p><span lang-tag="ja">テーマを決めず、自由に話しましょう。英語を「使う」楽しさを体感しながら、自然な表現力を身につけます。</span><span lang-tag="en">No fixed topic — just talk freely. Experience the enjoyment of actually "using" English while building natural expression.</span></p></div>
   </div>
 </div>
 
 <div class="section bg">
   <div class="inner">
-    <span class="section-label">レッスン場所</span>
-    <h2 class="section-title">あなたの都合に合わせます</h2>
+    <span class="section-label"><span lang-tag="ja">レッスン場所</span><span lang-tag="en">Lesson locations</span></span>
+    <h2 class="section-title"><span lang-tag="ja">あなたの都合に合わせます</span><span lang-tag="en">Whatever fits your schedule</span></h2>
     <p class="section-sub">Choose where you learn</p>
     <div class="divider"></div>
     <div class="grid-3">
-      <div class="card"><div class="card-icon">☕</div><h3>カフェレッスン<span>Café lessons</span></h3><p>町田・相模原エリアのカフェでリラックスしながらレッスン。場所はご希望に合わせます。カフェ代は各自ご負担ください。</p></div>
-      <div class="card"><div class="card-icon">🏠</div><h3>テリーの自宅<span>Terry's home</span></h3><p>テリーの自宅でのレッスンも可能です。落ち着いた環境で集中して学べます。※猫アレルギーの方はご注意ください（猫3匹います）。</p></div>
-      <div class="card"><div class="card-icon">💻</div><h3>オンライン<span>Online (Zoom / Meet)</span></h3><p>Zoom または Google Meet を使ったオンラインレッスン。自宅から気軽に受けられます。全国どこからでも対応可能です。</p></div>
+      <div class="card"><div class="card-icon">☕</div><h3><span lang-tag="ja">カフェレッスン</span><span lang-tag="en">Café lessons</span></h3><p><span lang-tag="ja">町田・相模原エリアのカフェでリラックスしながらレッスン。場所はご希望に合わせます。カフェ代は各自ご負担ください。</span><span lang-tag="en">Relaxed lessons at a café in the Machida/Sagamihara area, wherever you'd prefer. Café costs are covered individually.</span></p></div>
+      <div class="card"><div class="card-icon">🏠</div><h3><span lang-tag="ja">テリーの自宅</span><span lang-tag="en">Terry's home</span></h3><p><span lang-tag="ja">テリーの自宅でのレッスンも可能です。落ち着いた環境で集中して学べます。※猫アレルギーの方はご注意ください（猫3匹います）。</span><span lang-tag="en">Lessons at Terry's home are also available — a calm space to focus and learn. Please note there are 3 cats, worth knowing if you have allergies.</span></p></div>
+      <div class="card"><div class="card-icon">💻</div><h3><span lang-tag="ja">オンライン</span><span lang-tag="en">Online (Zoom / Meet)</span></h3><p><span lang-tag="ja">Zoom または Google Meet を使ったオンラインレッスン。自宅から気軽に受けられます。全国どこからでも対応可能です。</span><span lang-tag="en">Online lessons via Zoom or Google Meet — join comfortably from home, from anywhere in Japan.</span></p></div>
     </div>
   </div>
 </div>
 
 <div class="pricing-section">
   <div class="pricing-inner">
-    <span class="section-label" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.85);">料金</span>
-    <h2 class="section-title">シンプルな料金体系</h2>
+    <span class="section-label" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.85);"><span lang-tag="ja">料金</span><span lang-tag="en">Pricing</span></span>
+    <h2 class="section-title"><span lang-tag="ja">シンプルな料金体系</span><span lang-tag="en">Simple, Transparent Pricing</span></h2>
     <p class="section-sub">Transparent pricing — no hidden fees</p>
     <div class="divider"></div>
     <div class="pricing-grid">
       <div class="pricing-card featured">
-        <div class="pricing-type">マンツーマン</div>
-        <div class="pricing-price">¥5,000<span>/時間</span></div>
-        <div class="pricing-note">1対1 · 完全個別対応</div>
+        <div class="pricing-type"><span lang-tag="ja">マンツーマン</span><span lang-tag="en">One-on-one</span></div>
+        <div class="pricing-price">¥5,000<span><span lang-tag="ja">/時間</span><span lang-tag="en">/hour</span></span></div>
+        <div class="pricing-note"><span lang-tag="ja">1対1 · 完全個別対応</span><span lang-tag="en">1-on-1 · fully personalized</span></div>
       </div>
       <div class="pricing-card">
-        <div class="pricing-type">カップル</div>
-        <div class="pricing-price">¥3,500<span>/人/時間</span></div>
-        <div class="pricing-note">2名 · お得なペア料金</div>
+        <div class="pricing-type"><span lang-tag="ja">カップル</span><span lang-tag="en">Pair</span></div>
+        <div class="pricing-price">¥3,500<span><span lang-tag="ja">/人/時間</span><span lang-tag="en">/person/hour</span></span></div>
+        <div class="pricing-note"><span lang-tag="ja">2名 · お得なペア料金</span><span lang-tag="en">2 people · discounted pair rate</span></div>
       </div>
       <div class="pricing-card">
-        <div class="pricing-type">スモールグループ</div>
-        <div class="pricing-price">¥2,500<span>/人/時間</span></div>
-        <div class="pricing-note">3〜4名</div>
+        <div class="pricing-type"><span lang-tag="ja">スモールグループ</span><span lang-tag="en">Small group</span></div>
+        <div class="pricing-price">¥2,500<span><span lang-tag="ja">/人/時間</span><span lang-tag="en">/person/hour</span></span></div>
+        <div class="pricing-note"><span lang-tag="ja">3〜4名</span><span lang-tag="en">3–4 people</span></div>
       </div>
       <div class="pricing-card">
-        <div class="pricing-type">グループ</div>
-        <div class="pricing-price">¥2,000<span>/人/時間</span></div>
-        <div class="pricing-note">5〜6名</div>
+        <div class="pricing-type"><span lang-tag="ja">グループ</span><span lang-tag="en">Group</span></div>
+        <div class="pricing-price">¥2,000<span><span lang-tag="ja">/人/時間</span><span lang-tag="en">/person/hour</span></span></div>
+        <div class="pricing-note"><span lang-tag="ja">5〜6名</span><span lang-tag="en">5–6 people</span></div>
       </div>
     </div>
-    <p style="text-align:center;font-size:0.8rem;color:rgba(255,255,255,0.5);margin-top:1.5rem;">※ 交通費・施設利用料は含まれません。まずはメールまたはLINEでご相談ください。</p>
+    <p style="text-align:center;font-size:0.8rem;color:rgba(255,255,255,0.5);margin-top:1.5rem;"><span lang-tag="ja">※ 交通費・施設利用料は含まれません。まずはメールまたはLINEでご相談ください。</span><span lang-tag="en">※ Transportation and venue fees are not included. Please get in touch by Email or LINE to discuss first.</span></p>
   </div>
 </div>
 
 <div class="cta-banner">
-  <h2>まずは無料体験から。</h2>
-  <p>30分の無料体験レッスン実施中。<br>入会義務なし・プレッシャーなしです。</p>
+  <h2><span lang-tag="ja">まずは無料体験から。</span><span lang-tag="en">Start with a Free Trial.</span></h2>
+  <p><span lang-tag="ja">30分の無料体験レッスン実施中。<br>入会義務なし・プレッシャーなしです。</span><span lang-tag="en">A free 30-minute trial lesson is available now.<br>No obligation to continue, no pressure at all.</span></p>
   <div class="cta-btns">
-    <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="btn-email">📧 メールで申し込む</a>
-    <a href="https://line.me/ti/p/uBFxywc-E8" class="btn-line" onclick="">🟢 LINEで申し込む</a>
+    <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="btn-email"><span lang-tag="ja">📧 メールで申し込む</span><span lang-tag="en">📧 Apply by Email</span></a>
+    <a href="https://line.me/ti/p/uBFxywc-E8" class="btn-line" onclick=""><span lang-tag="ja">🟢 LINEで申し込む</span><span lang-tag="en">🟢 Apply on LINE</span></a>
   </div>
 </div>
 <footer class="footer">
   <div class="footer-links">
-    <a href="lessons.html" onclick="">レッスン内容</a>
-    <a href="about.html" onclick="">テリーについて</a>
-    <a href="schedule.html" onclick="">スケジュール・予約</a>
-    <a href="faq.html" onclick="">よくある質問</a>
-    <a href="free-trial.html" onclick="">無料体験レッスン</a>
+    <a href="lessons.html" onclick=""><span lang-tag="ja">レッスン内容</span><span lang-tag="en">Lessons</span></a>
+    <a href="about.html" onclick=""><span lang-tag="ja">テリーについて</span><span lang-tag="en">About Terry</span></a>
+    <a href="schedule.html" onclick=""><span lang-tag="ja">スケジュール・予約</span><span lang-tag="en">Schedule &amp; Booking</span></a>
+    <a href="faq.html" onclick=""><span lang-tag="ja">よくある質問</span><span lang-tag="en">FAQ</span></a>
+    <a href="free-trial.html" onclick=""><span lang-tag="ja">無料体験レッスン</span><span lang-tag="en">Free Trial Lesson</span></a>
   </div>
-  <p>© 2026 Eigo No Sensei · 英語の先生 · Machida, Tokyo &nbsp;|&nbsp; <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" style="cursor:pointer;">メール</a> &nbsp;|&nbsp; <a href="https://line.me/ti/p/uBFxywc-E8" onclick="">LINE</a></p>
+  <p>© 2026 Eigo No Sensei · 英語の先生 · Machida, Tokyo &nbsp;|&nbsp; <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" style="cursor:pointer;"><span lang-tag="ja">メール</span><span lang-tag="en">Email</span></a> &nbsp;|&nbsp; <a href="https://line.me/ti/p/uBFxywc-E8" onclick="">LINE</a></p>
 </footer>
 <script>
+
+  function setLang(lang){
+    document.documentElement.classList.toggle('lang-en', lang === 'en');
+    document.documentElement.setAttribute('lang', lang);
+    document.querySelectorAll('.lang-btn').forEach(function(b){
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    try { localStorage.setItem('eigoLang', lang); } catch(e){}
+  }
+  (function(){
+    var saved = 'ja';
+    try { saved = localStorage.getItem('eigoLang') || 'ja'; } catch(e){}
+    setLang(saved);
+  })();
+
   document.addEventListener('click', function(e) {
     const nav = document.querySelector('.nav-mobile');
     const btn = document.querySelector('.nav-hamburger');
