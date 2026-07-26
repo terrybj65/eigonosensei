@@ -88,13 +88,26 @@
     .tag-row{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;}
     .tag{background:var(--navy-lt);color:var(--navy);font-size:0.75rem;font-weight:700;padding:0.3rem 0.75rem;border-radius:100px;}
     @media(max-width:768px){.top-bar{justify-content:center;gap:1rem;}.nav-links{display:none;}.nav-hamburger{display:flex;}.grid-3,.grid-2{grid-template-columns:1fr;}.pricing-grid{grid-template-columns:1fr 1fr;}.profile-box{grid-template-columns:1fr;}}
+
+    /* ── LANGUAGE TOGGLE ── */
+    .lang-switch{display:flex;gap:2px;background:rgba(255,255,255,0.12);border-radius:100px;padding:2px;}
+    .lang-btn{background:none;border:none;color:rgba(255,255,255,0.65);font-size:0.72rem;font-weight:700;padding:0.25rem 0.65rem;border-radius:100px;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.15s;}
+    .lang-btn.active{background:#fff;color:var(--navy);}
+    [lang-tag="ja"]{display:inline;}
+    [lang-tag="en"]{display:none;}
+    html.lang-en [lang-tag="ja"]{display:none;}
+    html.lang-en [lang-tag="en"]{display:inline;}
   </style>
   
 </head>
 <body>
 <div class="top-bar">
-  <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="top-bar-item">📧 メール</a>
-  <a href="https://line.me/ti/p/uBFxywc-E8" class="top-bar-item line-btn" onclick="">🟢 LINEでお問い合わせ</a>
+  <div class="lang-switch">
+    <button class="lang-btn active" data-lang="ja" onclick="setLang('ja')">日本語</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+  </div>
+    <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="top-bar-item"><span lang-tag="ja">📧 メール</span><span lang-tag="en">📧 Email</span></a>
+  <a href="https://line.me/ti/p/uBFxywc-E8" class="top-bar-item line-btn" onclick=""><span lang-tag="ja">🟢 LINEでお問い合わせ</span><span lang-tag="en">🟢 Message on LINE</span></a>
 </div>
 <nav class="nav">
   <a href="index.html" class="nav-logo">
@@ -102,60 +115,60 @@
     <span class="nav-logo-jp">英 語 の 先 生</span>
   </a>
   <ul class="nav-links">
-    <li><a href="lessons.html" onclick="">レッスン内容</a></li>
-    <li><a href="about.html" onclick="">テリーについて</a></li>
-    <li><a href="schedule.html" onclick="">スケジュール・予約</a></li>
-    <li><a href="faq.html" onclick="">よくある質問</a></li>
-    <li><a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" style="font-size:0.85rem;font-weight:500;color:var(--ink-md);padding:0.4rem 0.75rem;border-radius:var(--radius);text-decoration:none;cursor:pointer;" onmouseover="this.style.color='var(--navy)';this.style.background='var(--navy-lt)'" onmouseout="this.style.color='var(--ink-md)';this.style.background=''">📧 メール</a></li>
+    <li><a href="lessons.html" onclick=""><span lang-tag="ja">レッスン内容</span><span lang-tag="en">Lessons</span></a></li>
+    <li><a href="about.html" onclick=""><span lang-tag="ja">テリーについて</span><span lang-tag="en">About Terry</span></a></li>
+    <li><a href="schedule.html" onclick=""><span lang-tag="ja">スケジュール・予約</span><span lang-tag="en">Schedule &amp; Booking</span></a></li>
+    <li><a href="faq.html" onclick=""><span lang-tag="ja">よくある質問</span><span lang-tag="en">FAQ</span></a></li>
+    <li><a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" style="font-size:0.85rem;font-weight:500;color:var(--ink-md);padding:0.4rem 0.75rem;border-radius:var(--radius);text-decoration:none;cursor:pointer;" onmouseover="this.style.color='var(--navy)';this.style.background='var(--navy-lt)'" onmouseout="this.style.color='var(--ink-md)';this.style.background=''"><span lang-tag="ja">📧 メール</span><span lang-tag="en">📧 Email</span></a></li>
     <li><a href="https://line.me/ti/p/uBFxywc-E8" class="nav-line" onclick="">LINE</a></li>
-    <li><a href="free-trial.html" class="nav-cta" onclick="">無料体験レッスン</a></li>
+    <li><a href="free-trial.html" class="nav-cta" onclick=""><span lang-tag="ja">無料体験レッスン</span><span lang-tag="en">Free Trial Lesson</span></a></li>
   </ul>
   <button class="nav-hamburger" onclick="document.querySelector('.nav-mobile').classList.toggle('open')" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 <div class="nav-mobile">
-  <a href="index.html" onclick="">ホーム</a>
-  <a href="lessons.html" onclick="">レッスン内容</a>
-  <a href="about.html" onclick="">テリーについて</a>
-  <a href="schedule.html" onclick="">スケジュール・予約</a>
-  <a href="faq.html" onclick="">よくある質問</a>
-  <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="nav-cta" style="cursor:pointer;">📧 メールでお問い合わせ</a>
-  <a href="https://line.me/ti/p/uBFxywc-E8" class="nav-line" onclick="">🟢 LINEでお問い合わせ</a>
-  <p style="font-size:12px;color:#888;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid #E2E8F0;line-height:1.8;">🎁 無料体験レッスン実施中 — <a href="mailto:terrybj65@msn.com" style="color:#1A3A5C;font-weight:700;">メール</a> または <a href="https://line.me/ti/p/uBFxywc-E8" style="color:#06C755;font-weight:700;">LINE</a> でご連絡を</p>
+  <a href="index.html" onclick=""><span lang-tag="ja">ホーム</span><span lang-tag="en">Home</span></a>
+  <a href="lessons.html" onclick=""><span lang-tag="ja">レッスン内容</span><span lang-tag="en">Lessons</span></a>
+  <a href="about.html" onclick=""><span lang-tag="ja">テリーについて</span><span lang-tag="en">About Terry</span></a>
+  <a href="schedule.html" onclick=""><span lang-tag="ja">スケジュール・予約</span><span lang-tag="en">Schedule &amp; Booking</span></a>
+  <a href="faq.html" onclick=""><span lang-tag="ja">よくある質問</span><span lang-tag="en">FAQ</span></a>
+  <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="nav-cta" style="cursor:pointer;"><span lang-tag="ja">📧 メールでお問い合わせ</span><span lang-tag="en">📧 Email Terry</span></a>
+  <a href="https://line.me/ti/p/uBFxywc-E8" class="nav-line" onclick=""><span lang-tag="ja">🟢 LINEでお問い合わせ</span><span lang-tag="en">🟢 Message on LINE</span></a>
+  <p style="font-size:12px;color:#888;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid #E2E8F0;line-height:1.8;"><span lang-tag="ja">🎁 無料体験レッスン実施中 — <a href="mailto:terrybj65@msn.com" style="color:#1A3A5C;font-weight:700;">メール</a> または <a href="https://line.me/ti/p/uBFxywc-E8" style="color:#06C755;font-weight:700;">LINE</a> でご連絡を</span><span lang-tag="en">🎁 Free trial lessons available — contact via <a href="mailto:terrybj65@msn.com" style="color:#1A3A5C;font-weight:700;">Email</a> or <a href="https://line.me/ti/p/uBFxywc-E8" style="color:#06C755;font-weight:700;">LINE</a></span></p>
 </div>
 
 <div class="page-hero" data-kanji="連">
   <div class="page-hero-inner">
-    <div class="page-hero-badge">📩 お問い合わせ</div>
-    <h1>お問い合わせ</h1>
+    <div class="page-hero-badge"><span lang-tag="ja">📩 お問い合わせ</span><span lang-tag="en">📩 Contact</span></div>
+    <h1><span lang-tag="ja">お問い合わせ</span><span lang-tag="en">Contact Terry</span></h1>
     <p class="page-hero-sub">Contact Terry — Japanese or English welcome</p>
   </div>
 </div>
 
 <div class="section">
-  <span class="section-label">連絡方法</span>
-  <h2 class="section-title">メールまたはLINEでどうぞ</h2>
+  <span class="section-label"><span lang-tag="ja">連絡方法</span><span lang-tag="en">How to reach out</span></span>
+  <h2 class="section-title"><span lang-tag="ja">メールまたはLINEでどうぞ</span><span lang-tag="en">Reach out via Email or LINE</span></h2>
   <p class="section-sub">Feel free to reach out — Terry replies within 24 hours</p>
   <div class="divider"></div>
   <div class="grid-2">
 
     <div class="card" style="border-top-color:var(--navy);">
       <div class="card-icon">📧</div>
-      <h3>メールでお問い合わせ<span>Email Terry directly</span></h3>
-      <p>ご質問・ご予約はメールでどうぞ。24時間以内に返信します。日本語・英語どちらでも大丈夫です。</p>
+      <h3><span lang-tag="ja">メールでお問い合わせ</span><span lang-tag="en">Contact by Email</span></h3>
+      <p><span lang-tag="ja">ご質問・ご予約はメールでどうぞ。24時間以内に返信します。日本語・英語どちらでも大丈夫です。</span><span lang-tag="en">Send questions or booking requests by email — Terry replies within 24 hours, Japanese or English is fine.</span></p>
       <p style="font-size:0.85rem;font-weight:700;color:var(--navy);margin:0.75rem 0 0.25rem;">terrybj65@msn.com</p>
-      <p style="font-size:0.78rem;color:var(--ink-lt);">件名に「レッスン」「体験」などとお書きください。<br><em>Subject: "Lesson" or "Trial lesson"</em></p>
-      <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" style="display:block;margin-top:1.25rem;padding:0.85rem;text-align:center;background:var(--navy);color:#fff;font-weight:700;border-radius:var(--radius);text-decoration:none;font-family:'Nunito',sans-serif;cursor:pointer;">📧 メールを送る</a>
+      <p style="font-size:0.78rem;color:var(--ink-lt);"><span lang-tag="ja">件名に「レッスン」「体験」などとお書きください。</span><span lang-tag="en">Please use a subject like "Lesson" or "Trial lesson".</span><br><em>Subject: "Lesson" or "Trial lesson"</em></p>
+      <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" style="display:block;margin-top:1.25rem;padding:0.85rem;text-align:center;background:var(--navy);color:#fff;font-weight:700;border-radius:var(--radius);text-decoration:none;font-family:'Nunito',sans-serif;cursor:pointer;"><span lang-tag="ja">📧 メールを送る</span><span lang-tag="en">📧 Send an Email</span></a>
     </div>
 
     <div class="card" style="border-top-color:#06C755;">
       <div class="card-icon">🟢</div>
-      <h3>LINEでお問い合わせ<span>Message on LINE</span></h3>
-      <p>LINEからのメッセージも大歓迎です。気軽にメッセージをどうぞ。日本語・英語どちらでも構いません。</p>
+      <h3><span lang-tag="ja">LINEでお問い合わせ</span><span lang-tag="en">Message on LINE</span></h3>
+      <p><span lang-tag="ja">LINEからのメッセージも大歓迎です。気軽にメッセージをどうぞ。日本語・英語どちらでも構いません。</span><span lang-tag="en">Messages on LINE are welcome too — feel free to reach out casually, in Japanese or English.</span></p>
       <p style="font-size:0.85rem;font-weight:700;color:var(--navy);margin:0.75rem 0 0.25rem;">LINE ID: uBFxywc-E8</p>
-      <p style="font-size:0.78rem;color:var(--ink-lt);">「レッスンについて聞きたい」とメッセージいただければOK！<br><em>Just say "I'd like to know about lessons"</em></p>
-      <a href="https://line.me/ti/p/uBFxywc-E8" onclick="" style="display:block;margin-top:1.25rem;padding:0.85rem;text-align:center;background:#06C755;color:#fff;font-weight:700;border-radius:var(--radius);text-decoration:none;font-family:'Nunito',sans-serif;">🟢 LINEで連絡する</a>
+      <p style="font-size:0.78rem;color:var(--ink-lt);"><span lang-tag="ja">「レッスンについて聞きたい」とメッセージいただければOK！</span><span lang-tag="en">Just message something like "I'd like to know about lessons"!</span><br><em>Just say "I'd like to know about lessons"</em></p>
+      <a href="https://line.me/ti/p/uBFxywc-E8" onclick="" style="display:block;margin-top:1.25rem;padding:0.85rem;text-align:center;background:#06C755;color:#fff;font-weight:700;border-radius:var(--radius);text-decoration:none;font-family:'Nunito',sans-serif;"><span lang-tag="ja">🟢 LINEで連絡する</span><span lang-tag="en">🟢 Message on LINE</span></a>
     </div>
 
   </div>
@@ -163,36 +176,51 @@
 
 <div class="section bg">
   <div class="inner">
-    <span class="section-label">よくある問い合わせ内容</span>
-    <h2 class="section-title">こんなことでもお気軽に</h2>
+    <span class="section-label"><span lang-tag="ja">よくある問い合わせ内容</span><span lang-tag="en">Common questions</span></span>
+    <h2 class="section-title"><span lang-tag="ja">こんなことでもお気軽に</span><span lang-tag="en">Feel free to ask about things like this</span></h2>
     <div class="divider"></div>
     <div class="grid-3">
-      <div class="card"><div class="card-icon">🆓</div><h3>体験レッスンの予約<span>Book a free trial</span></h3><p>「無料体験レッスンを受けたい」と一言でOKです。日程・場所を一緒に決めましょう。</p></div>
-      <div class="card"><div class="card-icon">📅</div><h3>レッスンの予約・変更<span>Lesson booking</span></h3><p>新規予約、日程変更、キャンセルなどもメール・LINEでお気軽にどうぞ。</p></div>
-      <div class="card"><div class="card-icon">❓</div><h3>料金・内容の確認<span>Questions about lessons</span></h3><p>料金、レッスン内容、場所など、不明な点は何でも聞いてください。</p></div>
+      <div class="card"><div class="card-icon">🆓</div><h3><span lang-tag="ja">体験レッスンの予約</span><span lang-tag="en">Book a free trial</span></h3><p><span lang-tag="ja">「無料体験レッスンを受けたい」と一言でOKです。日程・場所を一緒に決めましょう。</span><span lang-tag="en">Just say "I'd like a free trial lesson" — we'll sort out the date and place together.</span></p></div>
+      <div class="card"><div class="card-icon">📅</div><h3><span lang-tag="ja">レッスンの予約・変更</span><span lang-tag="en">Lesson booking</span></h3><p><span lang-tag="ja">新規予約、日程変更、キャンセルなどもメール・LINEでお気軽にどうぞ。</span><span lang-tag="en">New bookings, rescheduling, or cancellations — just reach out by Email or LINE.</span></p></div>
+      <div class="card"><div class="card-icon">❓</div><h3><span lang-tag="ja">料金・内容の確認</span><span lang-tag="en">Questions about lessons</span></h3><p><span lang-tag="ja">料金、レッスン内容、場所など、不明な点は何でも聞いてください。</span><span lang-tag="en">Pricing, lesson content, location — feel free to ask anything you're unsure about.</span></p></div>
     </div>
   </div>
 </div>
 
 <div class="cta-banner">
-  <h2>まずはご連絡ください。</h2>
-  <p>「体験レッスン希望」とメッセージいただければOK！<br>日本語でも英語でも、お気軽にどうぞ。</p>
+  <h2><span lang-tag="ja">まずはご連絡ください。</span><span lang-tag="en">Get in touch to start.</span></h2>
+  <p><span lang-tag="ja">「体験レッスン希望」とメッセージいただければOK！<br>日本語でも英語でも、お気軽にどうぞ。</span><span lang-tag="en">Just message "I'd like a trial lesson"!<br>Japanese or English, whichever's easiest for you.</span></p>
   <div class="cta-btns">
-    <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="btn-email">📧 メールで申し込む</a>
-    <a href="https://line.me/ti/p/uBFxywc-E8" class="btn-line" onclick="">🟢 LINEで申し込む</a>
+    <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" class="btn-email"><span lang-tag="ja">📧 メールで申し込む</span><span lang-tag="en">📧 Apply by Email</span></a>
+    <a href="https://line.me/ti/p/uBFxywc-E8" class="btn-line" onclick=""><span lang-tag="ja">🟢 LINEで申し込む</span><span lang-tag="en">🟢 Apply on LINE</span></a>
   </div>
 </div>
 <footer class="footer">
   <div class="footer-links">
-    <a href="lessons.html" onclick="">レッスン内容</a>
-    <a href="about.html" onclick="">テリーについて</a>
-    <a href="schedule.html" onclick="">スケジュール・予約</a>
-    <a href="faq.html" onclick="">よくある質問</a>
-    <a href="free-trial.html" onclick="">無料体験レッスン</a>
+    <a href="lessons.html" onclick=""><span lang-tag="ja">レッスン内容</span><span lang-tag="en">Lessons</span></a>
+    <a href="about.html" onclick=""><span lang-tag="ja">テリーについて</span><span lang-tag="en">About Terry</span></a>
+    <a href="schedule.html" onclick=""><span lang-tag="ja">スケジュール・予約</span><span lang-tag="en">Schedule &amp; Booking</span></a>
+    <a href="faq.html" onclick=""><span lang-tag="ja">よくある質問</span><span lang-tag="en">FAQ</span></a>
+    <a href="free-trial.html" onclick=""><span lang-tag="ja">無料体験レッスン</span><span lang-tag="en">Free Trial Lesson</span></a>
   </div>
-  <p>© 2026 Eigo No Sensei · 英語の先生 · Machida, Tokyo &nbsp;|&nbsp; <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" style="cursor:pointer;">メール</a> &nbsp;|&nbsp; <a href="https://line.me/ti/p/uBFxywc-E8" onclick="">LINE</a></p>
+  <p>© 2026 Eigo No Sensei · 英語の先生 · Machida, Tokyo &nbsp;|&nbsp; <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terrybj65'+'@'+'msn.com';" style="cursor:pointer;"><span lang-tag="ja">メール</span><span lang-tag="en">Email</span></a> &nbsp;|&nbsp; <a href="https://line.me/ti/p/uBFxywc-E8" onclick="">LINE</a></p>
 </footer>
 <script>
+
+  function setLang(lang){
+    document.documentElement.classList.toggle('lang-en', lang === 'en');
+    document.documentElement.setAttribute('lang', lang);
+    document.querySelectorAll('.lang-btn').forEach(function(b){
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    try { localStorage.setItem('eigoLang', lang); } catch(e){}
+  }
+  (function(){
+    var saved = 'ja';
+    try { saved = localStorage.getItem('eigoLang') || 'ja'; } catch(e){}
+    setLang(saved);
+  })();
+
   document.addEventListener('click', function(e) {
     const nav = document.querySelector('.nav-mobile');
     const btn = document.querySelector('.nav-hamburger');
