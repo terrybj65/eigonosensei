@@ -26,14 +26,14 @@
   <meta property="og:url" content="https://eigo-no-sensei.com/">
   <meta property="og:title" content="英語の先生 | Eigo No Sensei — 町田・相模原・オンライン">
   <meta property="og:description" content="町田・相模原エリアのネイティブ英語講師テリー。マンツーマン・少人数レッスン。カフェ・自宅・オンライン対応。27年の指導経験。無料体験レッスン実施中。">
-  <meta property="og:image" content="https://eigo-no-sensei.com/terry-profile.jpg">
+  <meta property="og:image" content="https://eigo-no-sensei.com/eigo-no-sensei-banner.jpg">
   <meta property="og:locale" content="ja_JP">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="英語の先生 | Eigo No Sensei — 町田・相模原・オンライン">
   <meta name="twitter:description" content="町田・相模原エリアのネイティブ英語講師テリー。マンツーマン・少人数レッスン。カフェ・自宅・オンライン対応。27年の指導経験。無料体験レッスン実施中。">
-  <meta name="twitter:image" content="https://eigo-no-sensei.com/terry-profile.jpg">
+  <meta name="twitter:image" content="https://eigo-no-sensei.com/eigo-no-sensei-banner.jpg">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -393,6 +393,35 @@
       border-radius: var(--radius-lg);
       border: 3px solid rgba(255,255,255,0.15);
       display: block;
+    }
+    .hero-banner-section {
+      padding: 0 0 2rem;
+    }
+    .hero-banner-section::before {
+      content: none;
+    }
+    .hero-banner-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .hero-cta-row {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      padding-top: 1.5rem;
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
     }
 
     /* ── TRUST STRIP ── */
@@ -902,17 +931,13 @@
 
 <main>
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-text">
-      <div class="hero-badge"><span lang-tag="ja">🇺🇸 アメリカ人ネイティブ講師 · 町田在住27年</span><span lang-tag="en">🇺🇸 American Native Teacher · 27 Years in Machida</span></div>
-      <h1><span lang-tag="ja">本物の英語を、<br><span>自分のペースで。</span></span><span lang-tag="en">Real English,<br><span>at your own pace.</span></span></h1>
-      <p class="hero-sub">Natural English at your own pace.</p>
-      <p class="hero-desc"><span lang-tag="ja">町田・相模原エリアで、ネイティブ英語講師テリーとマンツーマンレッスン。カフェ・自宅・オンラインで、あなたのスケジュールに合わせて柔軟に対応します。日常英会話からTOEIC・ビジネス英語まで、初心者から上級者まで歓迎。まずは無料30分体験レッスンからどうぞ。</span><span lang-tag="en">One-on-one lessons with native English teacher Terry in the Machida/Sagamihara area. Café, home, or online — flexibly built around your schedule. From everyday conversation to TOEIC and business English, all levels welcome. Start with a free 30-minute trial lesson.</span></p>
-    </div>
-    <div class="hero-photo">
-      <img src="terry-profile.jpg" alt="テリー先生 — 英語の先生">
-    </div>
+<section class="hero hero-banner-section">
+  <img class="hero-banner-img" src="eigo-no-sensei-banner.jpg" alt="英語の先生 Eigo No Sensei — Private English lessons with Terry, native teacher in Machida and Sagamihara, near Mt. Fuji">
+  <h1 class="sr-only"><span lang-tag="ja">本物の英語を、自分のペースで。</span><span lang-tag="en">Real English, at your own pace.</span></h1>
+  <p class="sr-only"><span lang-tag="ja">町田・相模原エリアで、ネイティブ英語講師テリーとマンツーマンレッスン。カフェ・自宅・オンラインで、あなたのスケジュールに合わせて柔軟に対応します。日常英会話からTOEIC・ビジネス英語まで、初心者から上級者まで歓迎。まずは無料30分体験レッスンからどうぞ。</span><span lang-tag="en">One-on-one lessons with native English teacher Terry in the Machida/Sagamihara area. Café, home, or online — flexibly built around your schedule. From everyday conversation to TOEIC and business English, all levels welcome. Start with a free 30-minute trial lesson.</span></p>
+  <div class="hero-cta-row">
+    <a href="#lessons" class="btn-trial"><span lang-tag="ja">無料体験レッスン</span><span lang-tag="en">Free Trial Lesson</span></a>
+    <a href="https://line.me/ti/p/uBFxywc-E8" class="btn-line-hero">🟢 LINE</a>
   </div>
 </section>
 
