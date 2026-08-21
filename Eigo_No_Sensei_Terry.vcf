@@ -1,11 +1,33 @@
 BEGIN:VCARD
-VERSION:3.0
-FN:Terry Johnson
-N:Johnson;Terry;;;
-ORG:Eigo No Sensei
+VERSION:2.1
+N:Johnson;Terry;B.
+FN:Terry B. Johnson
+ORG:Eigo no Sensei
 TITLE:Private English Teacher
-TEL;TYPE=CELL:+817017461843
-EMAIL;TYPE=INTERNET:terrybj65@msn.com
-URL:https://eigo-no-sensei.com/
 NOTE:Private English lessons with Terry. Free 30-minute trial lesson.
+TEL;CELL;VOICE:+817017461843 
+X-MS-OL-DEFAULT-POSTAL-ADDRESS:0
+URL;HOME:https://eigo-no-sensei.com/
+EMAIL;PREF;INTERNET:terry@eigo-no-sensei.com
+X-MS-CARDPICTURE;TYPE=JPEG;ENCODING=BASE64:
+ /9j/4AAQSkZJRgABAQEAeAB4AAD/2wBDAAcFBQYFBAcGBQYIBwcIChELCgkJChUPEAwRGBUa
+ GRgVGBcbHichGx0lHRcYIi4iJSgpKywrGiAvMy8qMicqKyr/2wBDAQcICAoJChQLCxQqHBgc
+ KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKir/wAAR
+ CACEAB8DASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAA
+ AgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkK
+ FhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWG
+ h4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl
+ 5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREA
+ AgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYk
+ NOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOE
+ hYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk
+ 5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD30yAsQKV5VQdyahHqaa1AEisZH56elJOQ
+ AFpYlxzTJPnmI9KAFPAApppT1pQMmgCVcKlQx5LFjUsp2xe9RDiLPc0AB60+IZamGpohgUAM
+ uDkgUyThVFK3zzZpkpy/0oAd/EKmHyx59qjUZqRwXXavT1oAijHJNNEbOc9PrUmFjXOCaid2
+ c8nigCwpU/dXFRys27GeKlj4FQ4Lvn8aAFk4QCoiMnipZNufmOcdhUZc4woxQBZf5I/fFRqS
+ x647YHSnzH7opi8Ln8aAI35c0w9aWkPWgCeZsuaH4TFNA3OKJKAGU09adTT1oAsqFzkU11ye
+ DQvQH3zUZPegA2H2NNKnuKdvI70eYe4H4UASn/Vf8BqI9KKKAEpp60UUAf/Z
+
+X-MS-OL-DESIGN;CHARSET=utf-8:<card xmlns="http://schemas.microsoft.com/office/outlook/12/electronicbusinesscards" ver="1.0" layout="left" bgcolor="ffffff"><img xmlns="" align="fit" area="16" use="cardpicture"/><fld xmlns="" prop="name" align="left" dir="ltr" style="b" color="000000" size="10"/><fld xmlns="" prop="org" align="left" dir="ltr" color="000000" size="8"/><fld xmlns="" prop="title" align="left" dir="ltr" color="000000" size="8"/><fld xmlns="" prop="blank" size="8"/><fld xmlns="" prop="telcell" align="left" dir="ltr" color="d48d2a" size="8"><label align="right" color="626262">Mobile</label></fld><fld xmlns="" prop="email" align="left" dir="ltr" color="d48d2a" size="8"/><fld xmlns="" prop="blank" size="8"/><fld xmlns="" prop="webhome" align="left" dir="ltr" color="000000" size="8"/><fld xmlns="" prop="blank" size="8"/><fld xmlns="" prop="blank" size="8"/><fld xmlns="" prop="blank" size="8"/><fld xmlns="" prop="blank" size="8"/><fld xmlns="" prop="blank" size="8"/><fld xmlns="" prop="blank" size="8"/><fld xmlns="" prop="blank" size="8"/><fld xmlns="" prop="blank" size="8"/></card>
+REV:20260821T223812Z
 END:VCARD
