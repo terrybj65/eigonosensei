@@ -109,6 +109,17 @@
     .tag{background:var(--navy-lt);color:var(--navy);font-size:0.75rem;font-weight:700;padding:0.3rem 0.75rem;border-radius:100px;}
     @media(max-width:768px){.top-bar{justify-content:center;gap:1rem;}.nav-links{display:none;}.nav-hamburger{display:flex;}.grid-3,.grid-2{grid-template-columns:1fr;}.access-table td{display:block;width:100%!important;border-bottom:none;padding:0.3rem 0;}.access-table tr{display:block;padding:0.6rem 0;border-bottom:1px solid var(--border);}}
 
+    /* ── HERO BANNER (shared image) ── */
+    .hero-banner-section{padding:0;position:relative;overflow:visible;}
+    .hero-banner-img{width:100%;height:auto;display:block;}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+    /* ── SUB-HERO (visible station heading, sits below the photo banner) ── */
+    .sub-hero{background:var(--navy);padding:1.75rem 5vw;text-align:center;}
+    .sub-hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.85);font-size:0.75rem;font-weight:700;letter-spacing:0.1em;padding:0.35rem 0.9rem;border-radius:100px;margin-bottom:0.75rem;}
+    .sub-hero h1{font-family:'Noto Sans JP',sans-serif;font-size:clamp(1.3rem,3vw,1.9rem);font-weight:700;color:#fff;line-height:1.4;margin-bottom:0.35rem;}
+    .sub-hero-sub{font-family:'Nunito',sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.6);}
+
     /* ── LANGUAGE TOGGLE ── */
     .lang-switch{display:flex;gap:2px;background:rgba(255,255,255,0.12);border-radius:100px;padding:2px;}
     .lang-btn{background:none;border:none;color:rgba(255,255,255,0.65);font-size:0.72rem;font-weight:700;padding:0.25rem 0.65rem;border-radius:100px;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.15s;}
@@ -158,24 +169,19 @@
   <p style="font-size:12px;color:#888;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid #E2E8F0;line-height:1.8;"><span lang-tag="ja">🎁 無料体験レッスン実施中 — <a href="mailto:terry@eigo-no-sensei.com" style="color:#1A3A5C;font-weight:700;">メール</a> または <a href="https://line.me/ti/p/uBFxywc-E8" style="color:#06C755;font-weight:700;">LINE</a> でご連絡を</span><span lang-tag="en">🎁 Free trial lessons available — contact via <a href="mailto:terry@eigo-no-sensei.com" style="color:#1A3A5C;font-weight:700;">Email</a> or <a href="https://line.me/ti/p/uBFxywc-E8" style="color:#06C755;font-weight:700;">LINE</a></span></p>
 </div>
 
-<div class="page-hero" data-kanji="駅">
-  <div class="page-hero-inner">
-    <div class="page-hero-badge"><span lang-tag="ja">📍 海老名エリア</span><span lang-tag="en">📍 Ebina Area</span></div>
-    <h1><span lang-tag="ja">海老名の英会話レッスン</span><span lang-tag="en">English Lessons Near Ebina Station</span></h1>
-    <p class="page-hero-sub">One-on-One English Lessons — Ebina</p>
-  </div>
+<section class="hero hero-banner-section">
+  <img class="hero-banner-img" src="eigo-no-sensei-banner-generic.jpg" alt="英語の先生 Eigo No Sensei — Private English lessons with Terry, native teacher in Machida and Sagamihara, near Mt. Fuji">
+</section>
+
+<div class="sub-hero">
+  <div class="sub-hero-badge"><span lang-tag="ja">📍 海老名エリア</span><span lang-tag="en">📍 Ebina Area</span></div>
+  <h1><span lang-tag="ja">海老名の英会話レッスン</span><span lang-tag="en">English Lessons Near Ebina Station</span></h1>
+  <p class="sub-hero-sub">One-on-One English Lessons — Ebina</p>
 </div>
 
 <div class="section">
-  <span class="section-label"><span lang-tag="ja">アクセス</span><span lang-tag="en">Access</span></span>
-  <h2 class="section-title"><span lang-tag="ja">3路線が使える海老名から、町田まで約10分</span><span lang-tag="en">A 3-Line Hub, ~10 Minutes From Machida</span></h2>
-  <div class="divider"></div>
-  <p style="font-size:0.92rem;color:var(--ink-md);margin-bottom:1.5rem;"><span lang-tag="ja">海老名駅は小田急小田原線・相模鉄道本線・JR相模線の3路線が乗り入れる神奈川県央の交通拠点です。小田急線なら町田駅まで約10分。通勤・通学のついでに立ち寄ってレッスンを受けることができます。もちろんオンラインレッスンも常時対応しています。</span><span lang-tag="en">Ebina Station is a major hub where the Odakyu Odawara Line, Sagami Railway (Sotetsu) Main Line, and JR Sagami Line all meet. Machida Station is about 10 minutes away on the Odakyu Line — an easy stop on your commute for a lesson. Online lessons are always available too.</span></p>
-  <table class="access-table">
-    <tr><td><span lang-tag="ja">町田駅まで</span><span lang-tag="en">To Machida Station</span></td><td><span lang-tag="ja">小田急小田原線で約10分</span><span lang-tag="en">~10 min on the Odakyu Odawara Line</span></td></tr>
-    <tr><td><span lang-tag="ja">新宿方面</span><span lang-tag="en">Toward Shinjuku</span></td><td><span lang-tag="ja">小田急小田原線・快速急行で約45分</span><span lang-tag="en">~45 min via Rapid Express, Odakyu Odawara Line</span></td></tr>
-    <tr><td><span lang-tag="ja">乗り入れ路線</span><span lang-tag="en">Connections</span></td><td><span lang-tag="ja">相模鉄道（相鉄）本線、JR相模線</span><span lang-tag="en">Sagami Railway (Sotetsu) Main Line, JR Sagami Line</span></td></tr>
-  </table>
+  <span class="section-label"><span lang-tag="ja">エリアについて</span><span lang-tag="en">About the Area</span></span>
+  <p style="font-size:0.92rem;color:var(--ink-md);"><span lang-tag="ja">海老名駅は小田急小田原線・相模鉄道本線・JR相模線の3路線が乗り入れる交通拠点で、駅直結の「ビナウォーク」には多くの飲食店やショップが並びます。買い物や食事のついでにレッスンを受けたい方にも便利なエリアです。</span><span lang-tag="en">Ebina is a hub where three train lines meet, with the ViNAWALK complex directly connected to the station offering plenty of shops and restaurants — convenient if you'd like to combine a lesson with an errand or a meal out.</span></p>
 </div>
 
 <div class="section bg">
@@ -207,13 +213,34 @@
   <span class="section-label"><span lang-tag="ja">料金</span><span lang-tag="en">Pricing</span></span>
   <h2 class="section-title"><span lang-tag="ja">町田・相模原エリアと同じ料金です</span><span lang-tag="en">Same Simple Pricing as Machida/Sagamihara</span></h2>
   <div class="divider"></div>
-  <p style="font-size:0.92rem;color:var(--ink-md);margin-bottom:1rem;"><span lang-tag="ja">マンツーマン ¥3,000／時間（1名様）。海老名駅周辺でのレッスンをご希望の場合は、交通費を別途ご負担いただきます。詳しくは料金ページをご覧ください。</span><span lang-tag="en">One-on-one lessons are ¥3,000/hour. If you'd like Terry to come to a café near Ebina itself, transportation costs are covered by the student. See the pricing page for full details.</span></p>
+  <p style="font-size:0.92rem;color:var(--ink-md);margin-bottom:1rem;"><span lang-tag="ja">マンツーマン ¥3,000／時間（1名様）、2名グループ ¥5,000／時間、3名以上はご相談ください。海老名駅周辺でのレッスンをご希望の場合は、交通費を別途ご負担いただきます。詳しくは料金ページをご覧ください。</span><span lang-tag="en">One-on-one lessons are ¥3,000/hour, ¥5,000/hour for a 2-person group, and 3+ students by request. If you'd like Terry to come to a café near Ebina itself, transportation costs are covered by the student. See the pricing page for full details.</span></p>
     <div class="tag-row">
-      <span class="tag">¥3,000 / <span lang-tag="ja">時間</span><span lang-tag="en">hour</span></span>
+      <span class="tag">¥3,000/<span lang-tag="ja">時間</span><span lang-tag="en">hr</span> (<span lang-tag="ja">1名</span><span lang-tag="en">1 person</span>)</span>
+      <span class="tag">¥5,000/<span lang-tag="ja">時間</span><span lang-tag="en">hr</span> (<span lang-tag="ja">2名グループ</span><span lang-tag="en">2-person group</span>)</span>
+      <span class="tag"><span lang-tag="ja">3名以上は要相談</span><span lang-tag="en">3+ contact for pricing</span></span>
       <span class="tag">🆓 <span lang-tag="ja">30分無料体験</span><span lang-tag="en">Free 30-min trial</span></span>
       <span class="tag"><svg width="16" height="12" viewBox="0 0 16 12" style="display:inline-block;vertical-align:-1px;border-radius:2px;margin-right:2px;" xmlns="http://www.w3.org/2000/svg"><rect width="16" height="12" fill="#B31942"/><rect y="0.92" width="16" height="0.92" fill="#fff"/><rect y="2.77" width="16" height="0.92" fill="#fff"/><rect y="4.62" width="16" height="0.92" fill="#fff"/><rect y="6.46" width="16" height="0.92" fill="#fff"/><rect y="8.31" width="16" height="0.92" fill="#fff"/><rect y="10.15" width="16" height="0.92" fill="#fff"/><rect width="7" height="6.46" fill="#0A3161"/></svg> <span lang-tag="ja">アメリカ人ネイティブ</span><span lang-tag="en">American Native Speaker</span></span>
     </div>
 </div>
+
+<div class="section">
+  <span class="section-label"><span lang-tag="ja">よくある質問</span><span lang-tag="en">FAQ</span></span>
+  <h2 class="section-title"><span lang-tag="ja">海老名駅まで来てもらうことはできますか？</span><span lang-tag="en">Can Terry come to Ebina Station itself?</span></h2>
+  <div class="divider"></div>
+  <p style="font-size:0.92rem;color:var(--ink-md);"><span lang-tag="ja">はい、可能です。ビナウォーク内のカフェでのレッスンにも対応していますが、交通費は生徒様のご負担となります。町田での対面、またはオンラインレッスンも選べます。</span><span lang-tag="en">Yes — lessons at a café inside ViNAWALK are available, with transportation costs covered by the student. Meeting in Machida or an online lesson are also options.</span></p>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "海老名駅まで来てもらうことはできますか？",
+    "acceptedAnswer": { "@type": "Answer", "text": "はい、可能です。ビナウォーク内のカフェでのレッスンにも対応していますが、交通費は生徒様のご負担となります。町田での対面、またはオンラインレッスンも選べます。" }
+  }]
+}
+</script>
 
 <div class="cta-banner">
   <h2><span lang-tag="ja">海老名から、まずは無料体験レッスンを</span><span lang-tag="en">Start With a Free Trial Lesson From Ebina</span></h2>
