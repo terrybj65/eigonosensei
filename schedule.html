@@ -124,10 +124,10 @@
       font-size: 0.95rem; color: var(--ink-lt);
     }
 
-    /* AVAILABILITY */
+    /* AVAILABILITY INTRO */
     .availability-section {
       max-width: 720px; margin: 0 auto;
-      padding: 2rem 5vw 1rem;
+      padding: 2rem 5vw 0.5rem;
       text-align: center;
     }
     .availability-section h2 {
@@ -138,6 +138,83 @@
       font-size: 0.95rem; color: var(--ink-md);
       line-height: 1.9;
     }
+
+    /* LEGEND */
+    .legend {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1.5rem; flex-wrap: wrap;
+      padding: 1rem 5vw;
+      font-size: 0.82rem; font-weight: 600; color: var(--ink-md);
+    }
+    .legend-item { display: flex; align-items: center; gap: 0.4rem; }
+    .legend-dot {
+      width: 14px; height: 14px; border-radius: 4px;
+      border: 2px solid;
+    }
+    .legend-dot.available { background: #E6F6EC; border-color: #A8DDBB; }
+    .legend-dot.booked { background: #FDECEC; border-color: #F3B8B4; }
+
+    /* WEEK NAV */
+    .week-nav {
+      max-width: 1200px; margin: 0.5rem auto 0;
+      padding: 0 5vw;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .week-nav-btn {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 0.5rem 1rem;
+      font-size: 0.88rem; font-weight: 700; color: var(--sky);
+      cursor: pointer; transition: all 0.2s;
+      font-family: 'Nunito', sans-serif;
+    }
+    .week-nav-btn:hover { background: var(--sky); color: #fff; }
+    .week-label {
+      font-size: 0.95rem; font-weight: 700; color: var(--ink);
+      text-align: center;
+    }
+
+    /* CALENDAR (read-only display, no click actions) */
+    .calendar-wrap {
+      max-width: 1200px; margin: 1.5rem auto 1rem;
+      padding: 0 5vw; overflow-x: auto;
+    }
+    .calendar {
+      display: grid;
+      grid-template-columns: 64px repeat(7, 1fr);
+      min-width: 700px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--white);
+    }
+    .cal-header {
+      background: var(--sky); color: #fff;
+      font-size: 0.78rem; font-weight: 700;
+      text-align: center; padding: 0.75rem 0.25rem;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+    .cal-header:last-child { border-right: none; }
+    .cal-header.time-header { background: #3a7ab0; }
+    .cal-header .day-name { display: block; font-size: 0.85rem; }
+    .cal-header .day-date { display: block; font-size: 0.72rem; opacity: 0.8; margin-top: 0.1rem; }
+    .cal-time {
+      font-size: 0.68rem; font-weight: 700; color: var(--ink-lt);
+      text-align: center; padding: 0;
+      border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      background: #F7F9FC; min-height: 40px;
+    }
+    .cal-time:last-of-type { border-bottom: none; }
+    .cal-slot {
+      border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      min-height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.66rem; font-weight: 700; text-align: center; padding: 2px 3px;
+      line-height: 1.25;
+    }
+    .cal-slot:last-child { border-right: none; }
+    .cal-slot.available-slot { background: #E6F6EC; color: #2f8a52; }
+    .cal-slot.booked-slot { background: #FDECEC; border-left: 3px solid #E5847D; color: #c0453d; }
 
     /* ENQUIRY SECTION */
     .enquiry-section {
@@ -215,6 +292,12 @@
       .enquiry-section { padding: 2rem 4vw; }
       .enquiry-inner h2 { font-size: 1.3rem; }
       .form-submit { width: 100%; }
+      .calendar-wrap { padding: 0 3vw; }
+      .calendar { min-width: 560px; font-size: 0.72rem; }
+      .cal-slot { min-height: 34px; font-size: 0.6rem; }
+      .cal-time { font-size: 0.58rem; min-height: 34px; }
+      .cal-header { font-size: 0.7rem; padding: 0.5rem 0.15rem; }
+      .week-nav { padding: 0 3vw; }
     }
   </style>
 </head>
@@ -253,26 +336,28 @@
   <p>Schedule &amp; Bookings — 現在の対応時間をご確認のうえ、お気軽にお問い合わせください。</p>
 </div>
 
-<!-- AVAILABILITY: static, manually maintained — no self-service booking -->
+<!-- AVAILABILITY: read-only calendar grid, manually maintained — no self-service booking -->
 <div class="availability-section">
-  <h2>現在の対応時間 · General Availability</h2>
+  <h2>現在の対応時間 · Weekly Schedule</h2>
   <p>
-    毎日 6:00〜22:00 の間で対応しています。<br>
-    Generally available every day, 6:00–22:00.
+    以下は現在の空き状況です（テリーが手動で更新）。ご希望の日時は下のフォーム、メール、またはLINEでお知らせください。<br>
+    Here's the current schedule (updated manually by Terry). Let us know your preferred day and time using the form below, by email, or on LINE.
   </p>
+</div>
 
-  <h2 style="margin-top:2rem;">現在ご予約が入っている日時 · Currently Booked / Unavailable</h2>
-  <ul id="booked-list" style="list-style:none;padding:0;margin:0 auto 1rem;max-width:420px;text-align:left;font-size:0.95rem;color:var(--ink-md);line-height:2.1;">
-    <li style="padding:0.4rem 0.9rem;background:#FDECEC;border-radius:var(--radius-sm);margin-bottom:0.5rem;">9月9日（火）6:00〜7:00 — ご予約済み <span style="color:var(--ink-lt);">/ Sept 9 (Tue) 6:00–7:00 — Booked</span></li>
-  </ul>
-  <p style="font-size:0.85rem;color:var(--ink-lt);">
-    ※ このリストはテリーが手動で更新しています。上記以外の日時は基本的にご案内可能です。<br>
-    This list is updated manually by Terry. Times not listed above are generally open.
-  </p>
-  <p style="margin-top:1rem;">
-    ご希望の日時は下のフォーム、メール、またはLINEでお知らせください。内容を確認のうえ、正式に確定いたします。<br>
-    Let us know your preferred day and time using the form below, by email, or on LINE — we'll confirm it with you directly.
-  </p>
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot available"></div>空き あり · Available</div>
+  <div class="legend-item"><div class="legend-dot booked"></div>予約済み · Booked</div>
+</div>
+
+<div class="week-nav">
+  <button class="week-nav-btn" onclick="changeWeek(-1)">← 前の週</button>
+  <div class="week-label"><span id="week-range"></span></div>
+  <button class="week-nav-btn" onclick="changeWeek(1)">次の週 →</button>
+</div>
+
+<div class="calendar-wrap">
+  <div class="calendar" id="calendar"></div>
 </div>
 
 <!-- ENQUIRY -->
@@ -350,6 +435,104 @@
 <footer class="footer">
   <p>© 2026 Eigo No Sensei · 英語の先生 · Machida, Tokyo &nbsp;|&nbsp; <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terry'+'@'+'eigo-no-sensei.com';" style="cursor:pointer;">terry@eigo-no-sensei.com</a></p>
 </footer>
+
+<script>
+  // ══════════════════════════════════════════════════════════════
+  // CALENDAR DATA — this is the ONLY part that needs editing.
+  // No admin panel, no login: just edit these two lists directly
+  // in this file whenever a lesson is confirmed or you're away.
+  // Nothing here lets a visitor click to book anything — it's a
+  // read-only display. Actual requests come through the form,
+  // email, or LINE below, and you add them here once confirmed.
+  //
+  // BOOKED_SLOTS: blocks a single hour.
+  //   { date: 'YYYY-MM-DD', hour: 6-21, label: 'short text' }
+  //
+  // BOOKED_DAYS: blocks an entire day (e.g. vacation).
+  //   'YYYY-MM-DD'
+  // ══════════════════════════════════════════════════════════════
+  const BOOKED_SLOTS = [
+    { date: '2026-09-09', hour: 6, label: '予約済み' },
+  ];
+  const BOOKED_DAYS = [
+    // 例 / example: '2026-09-20', '2026-09-21',
+  ];
+
+  // ── Display logic below — no need to touch this ──
+  let weekOffset = 0;
+  const DAYS_JP = ['日','月','火','水','木','金','土'];
+  const DAYS_EN = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const START_HOUR = 6, END_HOUR = 22;
+
+  function getWeekDates(offset) {
+    const now = new Date();
+    const day = now.getDay();
+    const monday = new Date(now);
+    monday.setDate(now.getDate() - (day === 0 ? 6 : day - 1) + offset * 7);
+    const dates = [];
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(monday);
+      d.setDate(monday.getDate() + i);
+      dates.push(d);
+    }
+    return dates;
+  }
+
+  function fmtDate(d) { return `${d.getMonth()+1}/${d.getDate()}`; }
+  function dateStr(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+
+  function renderCalendar() {
+    const dates = getWeekDates(weekOffset);
+    const cal = document.getElementById('calendar');
+    cal.innerHTML = '';
+
+    document.getElementById('week-range').textContent = `${fmtDate(dates[0])} 〜 ${fmtDate(dates[6])}`;
+
+    const timeHeader = document.createElement('div');
+    timeHeader.className = 'cal-header time-header';
+    timeHeader.textContent = '時間';
+    cal.appendChild(timeHeader);
+
+    dates.forEach(d => {
+      const hdr = document.createElement('div');
+      hdr.className = 'cal-header';
+      hdr.innerHTML = `<span class="day-name">${DAYS_JP[d.getDay()]} ${DAYS_EN[d.getDay()]}</span><span class="day-date">${fmtDate(d)}</span>`;
+      cal.appendChild(hdr);
+    });
+
+    for (let hour = START_HOUR; hour < END_HOUR; hour++) {
+      const timeLabel = document.createElement('div');
+      timeLabel.className = 'cal-time';
+      timeLabel.textContent = `${hour}:00`;
+      cal.appendChild(timeLabel);
+
+      dates.forEach(d => {
+        const ds = dateStr(d);
+        const isDayOff = BOOKED_DAYS.includes(ds);
+        const slot = BOOKED_SLOTS.find(s => s.date === ds && s.hour === hour);
+        const cell = document.createElement('div');
+        if (isDayOff) {
+          cell.className = 'cal-slot booked-slot';
+          cell.textContent = '休み';
+        } else if (slot) {
+          cell.className = 'cal-slot booked-slot';
+          cell.textContent = slot.label || '予約済み';
+        } else {
+          cell.className = 'cal-slot available-slot';
+          cell.textContent = '○';
+        }
+        cal.appendChild(cell);
+      });
+    }
+  }
+
+  function changeWeek(dir) {
+    weekOffset += dir;
+    renderCalendar();
+  }
+
+  renderCalendar();
+</script>
 
 <script>
   // ── ENQUIRY FORM: opens the visitor's email app with the details pre-filled ──
