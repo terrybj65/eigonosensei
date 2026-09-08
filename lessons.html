@@ -72,6 +72,7 @@
     .divider{width:48px;height:3px;background:var(--coral);border-radius:2px;margin:0.75rem 0 2rem;}
     .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;}
     .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;}
+    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;}
     .card{background:var(--paper);border:1px solid var(--border);border-top:3px solid var(--sky);border-radius:var(--radius);padding:1.5rem;}
     .card-icon{font-size:1.8rem;margin-bottom:0.75rem;}
     .card h3{font-family:'Noto Sans JP',sans-serif;font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:0.3rem;}
@@ -115,7 +116,7 @@
     .profile-bio p{font-size:0.9rem;color:var(--ink-md);line-height:1.9;margin-bottom:1rem;}
     .tag-row{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;}
     .tag{background:var(--navy-lt);color:var(--navy);font-size:0.75rem;font-weight:700;padding:0.3rem 0.75rem;border-radius:100px;}
-    @media(max-width:768px){.top-bar{justify-content:center;gap:1rem;}.nav-links{display:none;}.nav-hamburger{display:flex;}.grid-3,.grid-2{grid-template-columns:1fr;}.pricing-grid{grid-template-columns:1fr 1fr;}.profile-box{grid-template-columns:1fr;}}
+    @media(max-width:768px){.top-bar{justify-content:center;gap:1rem;}.nav-links{display:none;}.nav-hamburger{display:flex;}.grid-3,.grid-2,.grid-4{grid-template-columns:1fr;}.pricing-grid{grid-template-columns:1fr 1fr;}.profile-box{grid-template-columns:1fr;}}
 
     /* ── LANGUAGE TOGGLE ── */
     .lang-switch{display:flex;gap:2px;background:rgba(255,255,255,0.12);border-radius:100px;padding:2px;}
@@ -194,10 +195,12 @@
     <span class="section-label"><span lang-tag="ja">レッスン場所</span><span lang-tag="en">Lesson locations</span></span>
     <h2 class="section-title"><span lang-tag="ja">あなたの都合に合わせます</span><span lang-tag="en">Whatever fits your schedule</span></h2>
     <p class="section-sub">Choose where you learn</p>
+    <p style="font-size:0.88rem;color:var(--ink-md);max-width:640px;margin:-0.5rem auto 1.5rem;text-align:center;line-height:1.9;"><span lang-tag="ja">町田・相模原にお住まいの方はもちろん、通勤・通学で町田を通る方や、他の駅周辺にお住まいの方も歓迎です。</span><span lang-tag="en">Lessons welcome students living in Machida/Sagamihara, those who pass through Machida on their commute, and those living near other stations too.</span></p>
     <div class="divider"></div>
-    <div class="grid-3">
+    <div class="grid-4">
       <div class="card"><div class="card-icon">☕</div><h3><span lang-tag="ja">カフェレッスン</span><span lang-tag="en">Café lessons</span></h3><p><span lang-tag="ja">町田・相模原エリアのカフェでリラックスしながらレッスン。場所はご希望に合わせます。カフェ代は各自ご負担ください。</span><span lang-tag="en">Relaxed lessons at a café in the Machida/Sagamihara area, wherever you'd prefer. Café costs are covered individually.</span></p></div>
       <div class="card"><div class="card-icon">🏠</div><h3><span lang-tag="ja">テリーの自宅</span><span lang-tag="en">Terry's home</span></h3><p><span lang-tag="ja">テリーの自宅でのレッスンも可能です。落ち着いた環境で集中して学べます。※猫アレルギーの方はご注意ください（猫3匹います）。</span><span lang-tag="en">Lessons at Terry's home are also available — a calm space to focus and learn. Please note there are 3 cats, worth knowing if you have allergies.</span></p></div>
+      <div class="card"><div class="card-icon">🚉</div><h3><span lang-tag="ja">他の駅にお住まいの方</span><span lang-tag="en">Coming from another station</span></h3><p><span lang-tag="ja">町田・相模原エリア以外にお住まいの方も歓迎です。通勤・通学で町田を通る方は町田でのレッスンが便利です。ご自宅の最寄り駅周辺のカフェにテリーが伺うことも可能です（交通費は生徒様のご負担）。<a href="index.html#areas" style="color:var(--sky);font-weight:700;">対応エリア一覧はこちら</a>。</span><span lang-tag="en">Students outside the Machida/Sagamihara area are welcome too. If you already pass through Machida for work or school, meeting there is simplest — or Terry can come to a café near your own station instead, with transportation costs covered by the student. <a href="index.html#areas" style="color:var(--sky);font-weight:700;">See the full list of areas covered</a>.</span></p></div>
       <div class="card"><div class="card-icon">💻</div><h3><span lang-tag="ja">オンライン</span><span lang-tag="en">Online (Zoom / Meet)</span></h3><p><span lang-tag="ja">Zoom または Google Meet を使ったオンラインレッスン。自宅から気軽に受けられます。全国どこからでも対応可能です。</span><span lang-tag="en">Online lessons via Zoom or Google Meet — join comfortably from home, from anywhere in Japan.</span></p></div>
     </div>
   </div>
