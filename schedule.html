@@ -16,21 +16,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>スケジュール・予約 | Eigo No Sensei</title>
-  <meta name="description" content="英語レッスンのご予約はこちらから。町田・相模原エリアのネイティブ英語講師テリーのスケジュールから直接ご希望の日時をお選びいただけます。">
+  <meta name="description" content="英語レッスンのお申し込みはこちらから。町田・相模原エリアのネイティブ英語講師テリーの対応時間と現在の予約状況をご確認いただけます。">
   <link rel="canonical" href="https://eigo-no-sensei.com/schedule.html"/>
 
   <!-- Open Graph / Facebook / LINE -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://eigo-no-sensei.com/schedule.html">
   <meta property="og:title" content="スケジュール・予約 | Eigo No Sensei">
-  <meta property="og:description" content="英語レッスンのご予約はこちらから。町田・相模原エリアのネイティブ英語講師テリーのスケジュールから直接ご希望の日時をお選びいただけます。">
+  <meta property="og:description" content="英語レッスンのお申し込みはこちらから。町田・相模原エリアのネイティブ英語講師テリーの対応時間と現在の予約状況をご確認いただけます。">
   <meta property="og:image" content="https://eigo-no-sensei.com/terry-profile.jpg">
   <meta property="og:locale" content="ja_JP">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="スケジュール・予約 | Eigo No Sensei">
-  <meta name="twitter:description" content="英語レッスンのご予約はこちらから。町田・相模原エリアのネイティブ英語講師テリーのスケジュールから直接ご希望の日時をお選びいただけます。">
+  <meta name="twitter:description" content="英語レッスンのお申し込みはこちらから。町田・相模原エリアのネイティブ英語講師テリーの対応時間と現在の予約状況をご確認いただけます。">
   <meta name="twitter:image" content="https://eigo-no-sensei.com/terry-profile.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -253,15 +253,26 @@
   <p>Schedule &amp; Bookings — 現在の対応時間をご確認のうえ、お気軽にお問い合わせください。</p>
 </div>
 
-<!-- AVAILABILITY: live Calendly booking widget -->
-<div class="availability-section" style="max-width:900px;">
-  <h2>ご希望の日時をお選びください · Pick a Date &amp; Time</h2>
-  <p style="margin-bottom:1.5rem;">
-    下のカレンダーから直接ご予約いただけます。内容確認後、テリーより確定のご連絡をいたします。<br>
-    Book directly from the calendar below. Terry will confirm your booking after reviewing it.
+<!-- AVAILABILITY: static, manually maintained — no self-service booking -->
+<div class="availability-section">
+  <h2>現在の対応時間 · General Availability</h2>
+  <p>
+    毎日 6:00〜22:00 の間で対応しています。<br>
+    Generally available every day, 6:00–22:00.
   </p>
-  <div class="calendly-inline-widget" data-url="https://calendly.com/terrybj65-7505?locale=ja&hide_gdpr_banner=1" style="min-width:280px;height:700px;"></div>
-  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+  <h2 style="margin-top:2rem;">現在ご予約が入っている日時 · Currently Booked / Unavailable</h2>
+  <ul id="booked-list" style="list-style:none;padding:0;margin:0 auto 1rem;max-width:420px;text-align:left;font-size:0.95rem;color:var(--ink-md);line-height:2.1;">
+    <li style="padding:0.4rem 0.9rem;background:#FDECEC;border-radius:var(--radius-sm);margin-bottom:0.5rem;">9月9日（火）6:00〜7:00 — ご予約済み <span style="color:var(--ink-lt);">/ Sept 9 (Tue) 6:00–7:00 — Booked</span></li>
+  </ul>
+  <p style="font-size:0.85rem;color:var(--ink-lt);">
+    ※ このリストはテリーが手動で更新しています。上記以外の日時は基本的にご案内可能です。<br>
+    This list is updated manually by Terry. Times not listed above are generally open.
+  </p>
+  <p style="margin-top:1rem;">
+    ご希望の日時は下のフォーム、メール、またはLINEでお知らせください。内容を確認のうえ、正式に確定いたします。<br>
+    Let us know your preferred day and time using the form below, by email, or on LINE — we'll confirm it with you directly.
+  </p>
 </div>
 
 <!-- ENQUIRY -->
