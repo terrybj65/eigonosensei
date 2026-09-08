@@ -16,21 +16,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>スケジュール・予約 | Eigo No Sensei</title>
-  <meta name="description" content="英語レッスンのご予約・空き状況の確認はこちらから。町田・相模原エリアのネイティブ英語講師テリーのレッスンスケジュール。">
+  <meta name="description" content="英語レッスンのご予約はこちらから。町田・相模原エリアのネイティブ英語講師テリーのスケジュールから直接ご希望の日時をお選びいただけます。">
   <link rel="canonical" href="https://eigo-no-sensei.com/schedule.html"/>
 
   <!-- Open Graph / Facebook / LINE -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://eigo-no-sensei.com/schedule.html">
   <meta property="og:title" content="スケジュール・予約 | Eigo No Sensei">
-  <meta property="og:description" content="英語レッスンのご予約・空き状況の確認はこちらから。町田・相模原エリアのネイティブ英語講師テリーのレッスンスケジュール。">
+  <meta property="og:description" content="英語レッスンのご予約はこちらから。町田・相模原エリアのネイティブ英語講師テリーのスケジュールから直接ご希望の日時をお選びいただけます。">
   <meta property="og:image" content="https://eigo-no-sensei.com/terry-profile.jpg">
   <meta property="og:locale" content="ja_JP">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="スケジュール・予約 | Eigo No Sensei">
-  <meta name="twitter:description" content="英語レッスンのご予約・空き状況の確認はこちらから。町田・相模原エリアのネイティブ英語講師テリーのレッスンスケジュール。">
+  <meta name="twitter:description" content="英語レッスンのご予約はこちらから。町田・相模原エリアのネイティブ英語講師テリーのスケジュールから直接ご希望の日時をお選びいただけます。">
   <meta name="twitter:image" content="https://eigo-no-sensei.com/terry-profile.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -124,149 +124,19 @@
       font-size: 0.95rem; color: var(--ink-lt);
     }
 
-    /* LEGEND */
-    .legend {
-      display: flex; align-items: center; justify-content: center;
-      gap: 1.5rem; flex-wrap: wrap;
-      padding: 1rem 5vw;
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
-      font-size: 0.82rem; font-weight: 600; color: var(--ink-md);
-    }
-    .legend-item { display: flex; align-items: center; gap: 0.4rem; }
-    .legend-dot {
-      width: 14px; height: 14px; border-radius: 4px;
-      border: 2px solid;
-    }
-    .legend-dot.available { background: var(--available); border-color: var(--available-border); }
-    .legend-dot.booked { background: var(--booked); border-color: var(--booked-border); }
-    .legend-dot.empty { background: var(--empty); border-color: #CBD5E0; }
-
-    /* WEEK NAV */
-    .week-nav {
-      max-width: 1200px; margin: 1.5rem auto 0;
-      padding: 0 5vw;
-      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-    }
-    .week-nav-btn {
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: var(--radius-sm); padding: 0.5rem 1rem;
-      font-size: 0.88rem; font-weight: 700; color: var(--sky);
-      cursor: pointer; transition: all 0.2s;
-      font-family: 'Nunito', sans-serif;
-    }
-    .week-nav-btn:hover { background: var(--sky); color: #fff; }
-    .week-label {
-      font-size: 0.95rem; font-weight: 700; color: var(--ink);
+    /* AVAILABILITY */
+    .availability-section {
+      max-width: 720px; margin: 0 auto;
+      padding: 2rem 5vw 1rem;
       text-align: center;
     }
-    .week-label span {
-      display: block; font-family: 'Noto Serif JP', serif;
-      font-size: 0.78rem; font-weight: 300; color: var(--ink-lt);
+    .availability-section h2 {
+      font-size: 1.3rem; font-weight: 800; color: var(--ink);
+      margin-bottom: 0.75rem;
     }
-
-    /* CALENDAR */
-    .calendar-wrap {
-      max-width: 1200px; margin: 1.5rem auto 3rem;
-      padding: 0 5vw; overflow-x: auto;
-    }
-    .calendar {
-      display: grid;
-      grid-template-columns: 64px repeat(7, 1fr);
-      min-width: 700px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      background: var(--white);
-    }
-
-    /* Header row */
-    .cal-header {
-      background: var(--sky);
-      color: #fff;
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-align: center;
-      padding: 0.75rem 0.25rem;
-      border-right: 1px solid rgba(255,255,255,0.15);
-    }
-    .cal-header:last-child { border-right: none; }
-    .cal-header.time-header { background: #3a7ab0; }
-    .cal-header .day-name { display: block; font-size: 0.85rem; }
-    .cal-header .day-date { display: block; font-size: 0.72rem; opacity: 0.8; margin-top: 0.1rem; }
-    .cal-header.weekend { background: #5a9fd4; }
-
-    /* Time labels */
-    .cal-time {
-      font-size: 0.68rem; font-weight: 700;
-      color: var(--ink-lt);
-      text-align: center;
-      padding: 0;
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      background: #F7F9FC;
-      min-height: 44px;
-    }
-    .cal-time:last-of-type { border-bottom: none; }
-
-    /* Slots */
-    .cal-slot {
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      min-height: 44px;
-      cursor: pointer;
-      transition: all 0.15s;
-      position: relative;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.72rem; font-weight: 700;
-      text-align: center; padding: 2px 3px;
-    }
-    .cal-slot:last-child { border-right: none; }
-    .cal-slot.outside-hours {
-      background: #F0F4F8;
-      cursor: default;
-      color: transparent;
-    }
-    .cal-slot.empty-slot {
-      background: var(--empty);
-      color: transparent;
-    }
-    .cal-slot.empty-slot:hover {
-      background: var(--sky-lt);
-      color: var(--sky);
-    }
-    .cal-slot.empty-slot:hover::after {
-      content: '+';
-      font-size: 1.2rem;
-      color: var(--sky);
-    }
-    .cal-slot.available-slot {
-      background: var(--available);
-      border-color: var(--available-border);
-      color: var(--sky);
-    }
-    .cal-slot.available-slot:hover {
-      background: var(--sky);
-      color: #fff;
-    }
-    .cal-slot.booked-slot {
-      background: var(--booked);
-      border-left: 3px solid var(--coral);
-      color: var(--coral);
-      cursor: default;
-      font-size: 0.68rem;
-      line-height: 1.3;
-    }
-    .admin-mode .cal-slot.booked-slot {
-      cursor: pointer;
-    }
-    .admin-mode .cal-slot.booked-slot:hover {
-      background: #fce4e0;
-    }
-    .admin-mode .cal-slot.empty-slot:hover::after {
-      content: '予約追加';
-      font-size: 0.65rem;
+    .availability-section p {
+      font-size: 0.95rem; color: var(--ink-md);
+      line-height: 1.9;
     }
 
     /* ENQUIRY SECTION */
@@ -329,83 +199,6 @@
       text-align: center; margin-top: 0.5rem;
     }
 
-    /* ADMIN PANEL */
-    .admin-trigger {
-      position: fixed; bottom: 1.5rem; right: 1.5rem;
-      width: 44px; height: 44px;
-      background: transparent; border: none;
-      cursor: pointer; opacity: 0.01;
-      z-index: 200;
-    }
-    .admin-bar {
-      display: none;
-      position: fixed; bottom: 0; left: 0; right: 0;
-      background: #1e4d72; color: #fff;
-      padding: 0.75rem 5vw;
-      align-items: center; justify-content: space-between;
-      gap: 1rem; z-index: 150;
-      font-size: 0.85rem;
-    }
-    .admin-bar.visible { display: flex; }
-    .admin-bar-left { display: flex; align-items: center; gap: 0.75rem; }
-    .admin-indicator {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--coral); animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-    .admin-close {
-      background: rgba(255,255,255,0.1); border: none; color: #fff;
-      padding: 0.4rem 1rem; border-radius: var(--radius-sm);
-      cursor: pointer; font-family: 'Nunito', sans-serif;
-      font-size: 0.8rem; font-weight: 600;
-    }
-
-    /* MODAL */
-    .modal-overlay {
-      display: none; position: fixed; inset: 0;
-      background: rgba(26,37,53,0.5); z-index: 300;
-      align-items: center; justify-content: center;
-      padding: 1rem;
-    }
-    .modal-overlay.open { display: flex; }
-    .modal {
-      background: var(--white); border-radius: var(--radius);
-      padding: 2rem; width: 100%; max-width: 380px;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.2);
-    }
-    .modal h3 { font-size: 1.1rem; font-weight: 800; color: var(--ink); margin-bottom: 1.25rem; }
-    .modal-form { display: flex; flex-direction: column; gap: 0.75rem; }
-    .modal-form input {
-      border: 1px solid var(--border); border-radius: var(--radius-sm);
-      padding: 0.65rem 1rem; font-size: 0.9rem;
-      font-family: 'Nunito', sans-serif; color: var(--ink);
-      outline: none;
-    }
-    .modal-form input:focus { border-color: var(--sky); }
-    .modal-btns { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
-    .modal-btn-confirm {
-      flex: 1; background: var(--sky); color: #fff;
-      border: none; border-radius: 100px;
-      padding: 0.7rem; font-size: 0.9rem; font-weight: 700;
-      font-family: 'Nunito', sans-serif; cursor: pointer;
-    }
-    .modal-btn-cancel {
-      flex: 1; background: var(--empty); color: var(--ink-md);
-      border: 1px solid var(--border); border-radius: 100px;
-      padding: 0.7rem; font-size: 0.9rem; font-weight: 700;
-      font-family: 'Nunito', sans-serif; cursor: pointer;
-    }
-    .modal-btn-remove {
-      width: 100%; background: var(--booked); color: var(--coral);
-      border: 1px solid var(--booked-border); border-radius: 100px;
-      padding: 0.7rem; font-size: 0.9rem; font-weight: 700;
-      font-family: 'Nunito', sans-serif; cursor: pointer;
-      margin-top: 0.5rem;
-    }
-
     /* FOOTER */
     .footer {
       background: #1e4d72; color: rgba(255,255,255,0.7);
@@ -419,20 +212,9 @@
       .nav-links { display: none; }
       .nav-hamburger { display: flex; }
       .form-row { grid-template-columns: 1fr; }
-      .week-label span { display: none; }
-      .calendar-wrap { padding: 0 3vw; }
-      .calendar { min-width: 560px; font-size: 0.72rem; }
-      .cal-slot { min-height: 36px; font-size: 0.65rem; }
-      .cal-time { font-size: 0.6rem; min-height: 36px; }
-      .cal-header { font-size: 0.7rem; padding: 0.5rem 0.15rem; }
-      .week-nav { padding: 0 3vw; }
       .enquiry-section { padding: 2rem 4vw; }
       .enquiry-inner h2 { font-size: 1.3rem; }
       .form-submit { width: 100%; }
-      .scroll-hint { display: block !important; }
-    }
-    @media (min-width: 769px) {
-      .scroll-hint { display: none; }
     }
   </style>
 </head>
@@ -468,31 +250,18 @@
 <!-- PAGE HEADER -->
 <div class="page-header">
   <h1>スケジュール・予約</h1>
-  <p>Schedule &amp; Bookings — 空き状況をご確認のうえ、お気軽にお問い合わせください。</p>
+  <p>Schedule &amp; Bookings — 現在の対応時間をご確認のうえ、お気軽にお問い合わせください。</p>
 </div>
 
-<!-- LEGEND -->
-<div class="legend">
-  <div class="legend-item"><div class="legend-dot available"></div>空き あり</div>
-  <div class="legend-item"><div class="legend-dot booked"></div>予約済み</div>
-  <div class="legend-item"><div class="legend-dot empty"></div>対応時間外</div>
-</div>
-
-<p class="scroll-hint" style="text-align:center;font-size:0.75rem;color:#718096;padding:0.5rem;display:none;">← カレンダーは左右にスクロールできます</p>
-
-<!-- WEEK NAV -->
-<div class="week-nav">
-  <button class="week-nav-btn" onclick="changeWeek(-1)">← 前の週</button>
-  <div class="week-label">
-    <span id="week-range"></span>
-    今週のスケジュール
-  </div>
-  <button class="week-nav-btn" onclick="changeWeek(1)">次の週 →</button>
-</div>
-
-<!-- CALENDAR -->
-<div class="calendar-wrap">
-  <div class="calendar" id="calendar"></div>
+<!-- AVAILABILITY: live Calendly booking widget -->
+<div class="availability-section" style="max-width:900px;">
+  <h2>ご希望の日時をお選びください · Pick a Date &amp; Time</h2>
+  <p style="margin-bottom:1.5rem;">
+    下のカレンダーから直接ご予約いただけます。内容確認後、テリーより確定のご連絡をいたします。<br>
+    Book directly from the calendar below. Terry will confirm your booking after reviewing it.
+  </p>
+  <div class="calendly-inline-widget" data-url="https://calendly.com/terrybj65-7505?locale=ja&hide_gdpr_banner=1" style="min-width:280px;height:700px;"></div>
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </div>
 
 <!-- ENQUIRY -->
@@ -504,17 +273,17 @@
       <div class="form-row">
         <div class="form-group">
           <label>お名前 <span>Name</span></label>
-          <input type="text" placeholder="山田 太郎" required>
+          <input type="text" id="enq-name" placeholder="山田 太郎" required>
         </div>
         <div class="form-group">
           <label>メールアドレス <span>Email</span></label>
-          <input type="email" placeholder="example@email.com" required>
+          <input type="email" id="enq-email" placeholder="example@email.com" required>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
           <label>ご希望の曜日 <span>Preferred day</span></label>
-          <select>
+          <select id="enq-day">
             <option>月曜日 Monday</option>
             <option>火曜日 Tuesday</option>
             <option>水曜日 Wednesday</option>
@@ -526,7 +295,7 @@
         </div>
         <div class="form-group">
           <label>ご希望の時間帯 <span>Preferred time</span></label>
-          <select>
+          <select id="enq-time">
             <option>午前 Morning (6:00–12:00)</option>
             <option>午後 Afternoon (12:00–18:00)</option>
             <option>夜 Evening (18:00–22:00)</option>
@@ -536,7 +305,7 @@
       <div class="form-row">
         <div class="form-group">
           <label>レッスン形式 <span>Lesson type</span></label>
-          <select>
+          <select id="enq-lesson">
             <option>日常英会話</option>
             <option>ビジネス英語</option>
             <option>TOEIC対策</option>
@@ -548,7 +317,7 @@
         </div>
         <div class="form-group">
           <label>レッスン場所 <span>Location</span></label>
-          <select>
+          <select id="enq-location">
             <option>カフェ Café</option>
             <option>自宅 Home</option>
             <option>オンライン Online (Teams)</option>
@@ -558,10 +327,10 @@
       </div>
       <div class="form-group">
         <label>メッセージ <span>Message (optional)</span></label>
-        <textarea placeholder="現在の英語レベルや学習の目標などをお聞かせください。"></textarea>
+        <textarea id="enq-message" placeholder="現在の英語レベルや学習の目標などをお聞かせください。"></textarea>
       </div>
       <button type="submit" class="form-submit">送信する · Send Enquiry</button>
-      <p class="form-note">※ 送信後、テリーより2営業日以内にご連絡いたします。最初のご相談は無料です。<br>After submitting, Terry will be in touch within 2 business days. First consultation is free.</p>
+      <p class="form-note">※ 送信ボタンを押すと、内容を記入済みのメールがご利用のメールアプリで開きます。そのまま送信してください。<br>Pressing send will open your email app with the message pre-filled — just hit send from there.</p>
     </form>
   </div>
 </div>
@@ -571,217 +340,34 @@
   <p>© 2026 Eigo No Sensei · 英語の先生 · Machida, Tokyo &nbsp;|&nbsp; <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terry'+'@'+'eigo-no-sensei.com';" style="cursor:pointer;">terry@eigo-no-sensei.com</a></p>
 </footer>
 
-<!-- ADMIN TRIGGER (invisible corner button) -->
-<button class="admin-trigger" id="adminTrigger" onclick="promptAdmin()"></button>
-
-<!-- ADMIN BAR -->
-<div class="admin-bar" id="adminBar">
-  <div class="admin-bar-left">
-    <div class="admin-indicator"></div>
-    <span>管理者モード · Admin Mode — スロットをクリックして予約を追加・削除できます。</span>
-  </div>
-  <button class="admin-close" onclick="exitAdmin()">終了 Exit</button>
-</div>
-
-<!-- MODAL -->
-<div class="modal-overlay" id="modal">
-  <div class="modal">
-    <h3 id="modal-title">予約を追加</h3>
-    <div id="modal-body"></div>
-  </div>
-</div>
-
 <script>
-  // ── STATE ──
-  const ADMIN_PASSWORD = 'eigo2026';
-  let isAdmin = false;
-  let weekOffset = 0;
-  let bookings = {}; // in-memory only (GitHub Pages - no server storage)
-  let pendingSlot = null;
-
-  // Hours config
-  const WEEKDAY_START = 6, WEEKDAY_END = 22;
-  const WEEKEND_START = 6, WEEKEND_END = 18;
-  const DAYS_JP = ['日','月','火','水','木','金','土'];
-  const DAYS_EN = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-
-  // ── WEEK HELPERS ──
-  function getWeekDates(offset) {
-    const now = new Date();
-    const day = now.getDay(); // 0=Sun
-    const monday = new Date(now);
-    monday.setDate(now.getDate() - day + 1 + offset * 7);
-    const dates = [];
-    for (let i = 0; i < 7; i++) {
-      const d = new Date(monday);
-      d.setDate(monday.getDate() + i);
-      dates.push(d);
-    }
-    return dates;
-  }
-
-  function fmtDate(d) {
-    return `${d.getMonth()+1}/${d.getDate()}`;
-  }
-
-  function slotKey(dateStr, hour) {
-    return `${dateStr}_${hour}`;
-  }
-
-  function dateStr(d) {
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-  }
-
-  // ── RENDER CALENDAR ──
-  function renderCalendar() {
-    const dates = getWeekDates(weekOffset);
-    const cal = document.getElementById('calendar');
-    cal.innerHTML = '';
-
-    // Week label
-    document.getElementById('week-range').textContent =
-      `${fmtDate(dates[0])} 〜 ${fmtDate(dates[6])}`;
-
-    // Header row
-    const timeHeader = document.createElement('div');
-    timeHeader.className = 'cal-header time-header';
-    timeHeader.textContent = '時間';
-    cal.appendChild(timeHeader);
-
-    dates.forEach((d, i) => {
-      const isWeekend = (d.getDay() === 0 || d.getDay() === 6);
-      const hdr = document.createElement('div');
-      hdr.className = 'cal-header' + (isWeekend ? ' weekend' : '');
-      hdr.innerHTML = `<span class="day-name">${DAYS_JP[d.getDay()]} ${DAYS_EN[d.getDay()]}</span><span class="day-date">${fmtDate(d)}</span>`;
-      cal.appendChild(hdr);
-    });
-
-    // Time rows 6:00 to 22:00
-    for (let hour = 6; hour <= 21; hour++) {
-      // Time label
-      const timeLabel = document.createElement('div');
-      timeLabel.className = 'cal-time';
-      timeLabel.textContent = `${hour}:00`;
-      cal.appendChild(timeLabel);
-
-      dates.forEach(d => {
-        const isWeekend = (d.getDay() === 0 || d.getDay() === 6);
-        const endHour = isWeekend ? WEEKEND_END : WEEKDAY_END;
-        const slot = document.createElement('div');
-        const key = slotKey(dateStr(d), hour);
-        const booking = bookings[key];
-
-        if (hour >= endHour) {
-          slot.className = 'cal-slot outside-hours';
-        } else if (booking) {
-          slot.className = 'cal-slot booked-slot';
-          slot.textContent = booking.name;
-          if (isAdmin) {
-            slot.onclick = () => openRemoveModal(key, booking, d, hour);
-          }
-        } else {
-          slot.className = 'cal-slot empty-slot';
-          if (isAdmin) {
-            slot.onclick = () => openAddModal(key, d, hour);
-          }
-        }
-        cal.appendChild(slot);
-      });
-    }
-  }
-
-  function changeWeek(dir) {
-    weekOffset += dir;
-    renderCalendar();
-  }
-
-  // ── ADMIN ──
-  function promptAdmin() {
-    const pw = prompt('管理者パスワードを入力してください\nEnter admin password:');
-    if (pw === ADMIN_PASSWORD) {
-      isAdmin = true;
-      document.getElementById('adminBar').classList.add('visible');
-      document.body.classList.add('admin-mode');
-      renderCalendar();
-    }
-  }
-
-  function exitAdmin() {
-    isAdmin = false;
-    document.getElementById('adminBar').classList.remove('visible');
-    document.body.classList.remove('admin-mode');
-    renderCalendar();
-  }
-
-  // ── MODALS ──
-  function openAddModal(key, d, hour) {
-    pendingSlot = key;
-    document.getElementById('modal-title').textContent = `予約追加 · ${fmtDate(d)} ${DAYS_JP[d.getDay()]} ${hour}:00〜${hour+1}:00`;
-    document.getElementById('modal-body').innerHTML = `
-      <div class="modal-form">
-        <input type="text" id="modal-name" placeholder="生徒のお名前 Student name" />
-        <input type="text" id="modal-lesson" placeholder="レッスン内容 Lesson type" />
-        <div class="modal-btns">
-          <button class="modal-btn-confirm" onclick="confirmAdd()">追加 Add</button>
-          <button class="modal-btn-cancel" onclick="closeModal()">キャンセル</button>
-        </div>
-      </div>`;
-    document.getElementById('modal').classList.add('open');
-  }
-
-  function openRemoveModal(key, booking, d, hour) {
-    pendingSlot = key;
-    document.getElementById('modal-title').textContent = `予約確認 · ${fmtDate(d)} ${DAYS_JP[d.getDay()]} ${hour}:00〜${hour+1}:00`;
-    document.getElementById('modal-body').innerHTML = `
-      <div class="modal-form">
-        <p style="font-size:0.9rem;color:var(--ink-md);margin-bottom:0.5rem;">
-          <strong>${booking.name}</strong><br>
-          <span style="font-size:0.82rem;color:var(--ink-lt);">${booking.lesson || ''}</span>
-        </p>
-        <div class="modal-btns">
-          <button class="modal-btn-cancel" onclick="closeModal()">閉じる Close</button>
-        </div>
-        <button class="modal-btn-remove" onclick="confirmRemove()">予約を削除 Remove</button>
-      </div>`;
-    document.getElementById('modal').classList.add('open');
-  }
-
-  function confirmAdd() {
-    const name = document.getElementById('modal-name').value.trim();
-    const lesson = document.getElementById('modal-lesson').value.trim();
-    if (!name) { alert('お名前を入力してください。'); return; }
-    bookings[pendingSlot] = { name, lesson };
-    // bookings saved in memory
-    closeModal();
-    renderCalendar();
-  }
-
-  function confirmRemove() {
-    delete bookings[pendingSlot];
-    // bookings saved in memory
-    closeModal();
-    renderCalendar();
-  }
-
-  function closeModal() {
-    document.getElementById('modal').classList.remove('open');
-    pendingSlot = null;
-  }
-
-  // Close modal on overlay click
-  document.getElementById('modal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-  });
-
-  // ── ENQUIRY FORM ──
+  // ── ENQUIRY FORM: opens the visitor's email app with the details pre-filled ──
   function handleEnquiry(e) {
     e.preventDefault();
-    alert('お問い合わせありがとうございます！\nTerry will be in touch within 2 business days.\n\nテリーより2営業日以内にご連絡いたします。');
-    e.target.reset();
-  }
+    const name = document.getElementById('enq-name').value.trim();
+    const email = document.getElementById('enq-email').value.trim();
+    const day = document.getElementById('enq-day').value;
+    const time = document.getElementById('enq-time').value;
+    const lesson = document.getElementById('enq-lesson').value;
+    const location = document.getElementById('enq-location').value;
+    const message = document.getElementById('enq-message').value.trim();
 
-  // ── INIT ──
-  renderCalendar();
+    const subject = `レッスンお申し込み — ${name}`;
+    const bodyLines = [
+      `お名前 / Name: ${name}`,
+      `メールアドレス / Email: ${email}`,
+      `ご希望の曜日 / Preferred day: ${day}`,
+      `ご希望の時間帯 / Preferred time: ${time}`,
+      `レッスン形式 / Lesson type: ${lesson}`,
+      `レッスン場所 / Location: ${location}`,
+      `メッセージ / Message: ${message || '(なし / none)'}`
+    ];
+    const body = bodyLines.join('\n');
+    const mailto = 'mail' + 'to:' + 'terry' + '@' + 'eigo-no-sensei.com'
+      + '?subject=' + encodeURIComponent(subject)
+      + '&body=' + encodeURIComponent(body);
+    window.location.href = mailto;
+  }
 </script>
 </body>
 </html>
