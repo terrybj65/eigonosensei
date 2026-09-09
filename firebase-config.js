@@ -6,10 +6,10 @@
 // both admin.html and schedule.html import it from here.
 // ══════════════════════════════════════════════════════════════
 export const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyBUjnfDZYWX2Un8J1DemT1Cp2NTZvkBs3g",
+  authDomain: "eigo-no-sensei.firebaseapp.com",
+  projectId: "eigo-no-sensei",
+  storageBucket: "eigo-no-sensei.firebasestorage.app",
+  messagingSenderId: "412062953609",
+  appId: "1:412062953609:web:9a7cd45cfec0d991ea5658"
 };
