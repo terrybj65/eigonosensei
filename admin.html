@@ -174,7 +174,7 @@
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (e) {
-      errEl.textContent = 'ログインできませんでした。メールアドレスとパスワードをご確認ください。';
+      errEl.textContent = `ログインエラー / Login error: ${e.code || e.message}`;
     }
   };
 
