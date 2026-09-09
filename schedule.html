@@ -340,8 +340,8 @@
 <div class="availability-section">
   <h2>現在の対応時間 · Weekly Schedule</h2>
   <p>
-    以下は現在の空き状況です（テリーが手動で更新）。ご希望の日時は下のフォーム、メール、またはLINEでお知らせください。<br>
-    Here's the current schedule (updated manually by Terry). Let us know your preferred day and time using the form below, by email, or on LINE.
+    以下は現在の空き状況です。ご希望の日時は下のフォーム、メール、またはLINEでお知らせください。<br>
+    Here's the current schedule. Let us know your preferred day and time using the form below, by email, or on LINE.
   </p>
 </div>
 
@@ -436,29 +436,32 @@
   <p>© 2026 Eigo No Sensei · 英語の先生 · Machida, Tokyo &nbsp;|&nbsp; <a href="javascript:void(0);" onclick="window.location.href='mail'+'to:'+'terry'+'@'+'eigo-no-sensei.com';" style="cursor:pointer;">terry@eigo-no-sensei.com</a></p>
 </footer>
 
-<script>
+<script type="module">
   // ══════════════════════════════════════════════════════════════
-  // CALENDAR DATA — this is the ONLY part that needs editing.
-  // No admin panel, no login: just edit these two lists directly
-  // in this file whenever a lesson is confirmed or you're away.
-  // Nothing here lets a visitor click to book anything — it's a
-  // read-only display. Actual requests come through the form,
-  // email, or LINE below, and you add them here once confirmed.
-  //
-  // BOOKED_SLOTS: blocks a single hour.
-  //   { date: 'YYYY-MM-DD', hour: 6-21, label: 'short text' }
-  //
-  // BOOKED_DAYS: blocks an entire day (e.g. vacation).
-  //   'YYYY-MM-DD'
+  // This calendar reads live from Firestore — nothing to edit here
+  // manually anymore. Bookings and days off are managed from
+  // admin.html. This page only reads; it never writes.
   // ══════════════════════════════════════════════════════════════
-  const BOOKED_SLOTS = [
-    { date: '2026-09-09', hour: 6, label: '予約済み' },
-  ];
-  const BOOKED_DAYS = [
-    // 例 / example: '2026-09-20', '2026-09-21',
-  ];
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import { firebaseConfig } from "./firebase-config.js";
 
-  // ── Display logic below — no need to touch this ──
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  let bookedSlots = {}; // key: "YYYY-MM-DD_H" -> label
+  let daysOff = new Set();
+
+  async function loadData() {
+    const bookingsSnap = await getDocs(collection(db, 'bookings'));
+    bookedSlots = {};
+    bookingsSnap.forEach(d => { bookedSlots[d.id] = d.data().label || '予約済み'; });
+
+    const daysOffSnap = await getDocs(collection(db, 'daysOff'));
+    daysOff = new Set();
+    daysOffSnap.forEach(d => daysOff.add(d.id));
+  }
+
   let weekOffset = 0;
   const DAYS_JP = ['日','月','火','水','木','金','土'];
   const DAYS_EN = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
@@ -508,15 +511,14 @@
 
       dates.forEach(d => {
         const ds = dateStr(d);
-        const isDayOff = BOOKED_DAYS.includes(ds);
-        const slot = BOOKED_SLOTS.find(s => s.date === ds && s.hour === hour);
+        const key = `${ds}_${hour}`;
         const cell = document.createElement('div');
-        if (isDayOff) {
+        if (daysOff.has(ds)) {
           cell.className = 'cal-slot booked-slot';
           cell.textContent = '休み';
-        } else if (slot) {
+        } else if (bookedSlots[key]) {
           cell.className = 'cal-slot booked-slot';
-          cell.textContent = slot.label || '予約済み';
+          cell.textContent = bookedSlots[key];
         } else {
           cell.className = 'cal-slot available-slot';
           cell.textContent = '○';
@@ -526,12 +528,12 @@
     }
   }
 
-  function changeWeek(dir) {
+  window.changeWeek = function (dir) {
     weekOffset += dir;
     renderCalendar();
-  }
+  };
 
-  renderCalendar();
+  loadData().then(renderCalendar);
 </script>
 
 <script>

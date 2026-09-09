@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Schedule Admin — Eigo No Sensei</title>
+<style>
+  :root {
+    --sky: #4a90c2; --sky-lt: #EAF4FB; --sky-md: #C8E2F4;
+    --ink: #1A2535; --ink-md: #4A5568; --ink-lt: #718096;
+    --white: #fff; --border: #E2E8F0;
+    --radius: 12px; --radius-sm: 8px;
+    --available: #E6F6EC; --available-border: #A8DDBB;
+    --booked: #FDECEC; --booked-border: #F3B8B4;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: 'Segoe UI', 'Hiragino Sans', sans-serif;
+    background: #F7F9FC; color: var(--ink); min-height: 100vh;
+  }
+  .top-bar {
+    background: var(--white); border-bottom: 1px solid var(--border);
+    padding: 1rem 5vw; display: flex; align-items: center; justify-content: space-between;
+  }
+  .top-bar h1 { font-size: 1.1rem; margin: 0; }
+  .logout-btn, .login-btn, .save-btn, .cancel-btn {
+    background: var(--sky); color: #fff; border: none;
+    border-radius: var(--radius-sm); padding: 0.6rem 1.2rem;
+    font-size: 0.88rem; font-weight: 700; cursor: pointer;
+  }
+  .logout-btn { background: var(--white); color: var(--ink-md); border: 1px solid var(--border); }
+
+  /* LOGIN */
+  #login-screen {
+    max-width: 380px; margin: 4rem auto; padding: 2rem;
+    background: var(--white); border-radius: var(--radius);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  #login-screen h2 { margin-top: 0; font-size: 1.2rem; }
+  #login-screen input {
+    width: 100%; padding: 0.7rem 1rem; margin-bottom: 0.8rem;
+    border: 1px solid var(--border); border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+  }
+  #login-error { color: #c0453d; font-size: 0.85rem; margin-bottom: 0.8rem; min-height: 1.2em; }
+
+  /* ADMIN PANEL */
+  #admin-panel { display: none; padding: 1.5rem 5vw 3rem; }
+  .legend {
+    display: flex; gap: 1.5rem; align-items: center; margin-bottom: 1rem;
+    font-size: 0.85rem; color: var(--ink-md);
+  }
+  .legend-item { display: flex; align-items: center; gap: 0.4rem; }
+  .legend-dot { width: 14px; height: 14px; border-radius: 4px; border: 2px solid; }
+  .legend-dot.available { background: var(--available); border-color: var(--available-border); }
+  .legend-dot.booked { background: var(--booked); border-color: var(--booked-border); }
+  .hint { font-size: 0.85rem; color: var(--ink-lt); margin-bottom: 1rem; }
+
+  .week-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1100px; margin: 0 auto 1rem;
+  }
+  .week-nav button {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 0.5rem 1rem;
+    font-size: 0.88rem; font-weight: 700; color: var(--sky); cursor: pointer;
+  }
+  .week-label { font-weight: 700; }
+
+  .calendar-wrap { max-width: 1100px; margin: 0 auto; overflow-x: auto; }
+  .calendar {
+    display: grid; grid-template-columns: 64px repeat(7, 1fr);
+    min-width: 700px; border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden; background: var(--white);
+  }
+  .cal-header {
+    background: var(--sky); color: #fff; font-size: 0.78rem; font-weight: 700;
+    text-align: center; padding: 0.6rem 0.25rem; border-right: 1px solid rgba(255,255,255,0.15);
+    cursor: pointer; user-select: none;
+  }
+  .cal-header:last-child { border-right: none; }
+  .cal-header.time-header { background: #3a7ab0; cursor: default; }
+  .cal-header .day-name { display: block; font-size: 0.85rem; }
+  .cal-header .day-date { display: block; font-size: 0.72rem; opacity: 0.8; margin-top: 0.1rem; }
+  .cal-header.day-off { background: #8a4a45; }
+  .cal-header.day-off .day-date::after { content: ' 休'; }
+
+  .cal-time {
+    font-size: 0.68rem; font-weight: 700; color: var(--ink-lt); text-align: center;
+    border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    background: #F7F9FC; min-height: 42px;
+  }
+  .cal-slot {
+    border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    min-height: 42px; cursor: pointer; transition: opacity 0.15s;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.66rem; font-weight: 700; text-align: center; padding: 2px 3px; line-height: 1.2;
+  }
+  .cal-slot:last-child { border-right: none; }
+  .cal-slot:hover { opacity: 0.7; }
+  .cal-slot.available-slot { background: var(--available); color: #2f8a52; }
+  .cal-slot.booked-slot { background: var(--booked); border-left: 3px solid #E5847D; color: #c0453d; }
+  .cal-slot.day-off-slot { background: #F0E5E4; color: #a08380; cursor: default; }
+  .cal-slot.day-off-slot:hover { opacity: 1; }
+
+  #saving-indicator {
+    position: fixed; bottom: 1.5rem; right: 1.5rem;
+    background: var(--ink); color: #fff; padding: 0.6rem 1.2rem;
+    border-radius: 100px; font-size: 0.85rem; display: none;
+  }
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <h2>スケジュール管理 · Schedule Admin</h2>
+  <input type="email" id="login-email" placeholder="メールアドレス / Email" autocomplete="username">
+  <input type="password" id="login-password" placeholder="パスワード / Password" autocomplete="current-password">
+  <div id="login-error"></div>
+  <button class="login-btn" onclick="doLogin()" style="width:100%;">ログイン / Log In</button>
+</div>
+
+<div id="admin-panel">
+  <div class="top-bar" style="margin:-1.5rem -5vw 1.5rem;">
+    <h1>スケジュール管理 · Schedule Admin</h1>
+    <button class="logout-btn" onclick="doLogout()">ログアウト / Log Out</button>
+  </div>
+
+  <p class="hint">
+    空いている時間をクリックすると予約済みにできます。予約済みの時間をクリックすると解除されます。曜日の見出しをクリックするとその日を終日休みにできます。<br>
+    Click an open slot to mark it booked. Click a booked slot to clear it. Click a day's header to toggle the whole day off.
+  </p>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot available"></div>空き · Available</div>
+    <div class="legend-item"><div class="legend-dot booked"></div>予約済み · Booked</div>
+  </div>
+
+  <div class="week-nav">
+    <button onclick="changeWeek(-1)">← 前の週</button>
+    <div class="week-label"><span id="week-range"></span></div>
+    <button onclick="changeWeek(1)">次の週 →</button>
+  </div>
+
+  <div class="calendar-wrap">
+    <div class="calendar" id="calendar"></div>
+  </div>
+</div>
+
+<div id="saving-indicator">保存中... / Saving...</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import {
+    getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import {
+    getFirestore, collection, doc, setDoc, deleteDoc, getDocs
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import { firebaseConfig } from "./firebase-config.js";
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // ── AUTH ──
+  window.doLogin = async function () {
+    const email = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+    const errEl = document.getElementById('login-error');
+    errEl.textContent = '';
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (e) {
+      errEl.textContent = 'ログインできませんでした。メールアドレスとパスワードをご確認ください。';
+    }
+  };
+
+  window.doLogout = function () {
+    signOut(auth);
+  };
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('admin-panel').style.display = 'block';
+      loadAndRender();
+    } else {
+      document.getElementById('login-screen').style.display = 'block';
+      document.getElementById('admin-panel').style.display = 'none';
+    }
+  });
+
+  // ── DATA ──
+  let bookedSlots = {}; // key: "YYYY-MM-DD_H" -> label
+  let daysOff = new Set(); // set of "YYYY-MM-DD"
+
+  async function loadAndRender() {
+    const bookingsSnap = await getDocs(collection(db, 'bookings'));
+    bookedSlots = {};
+    bookingsSnap.forEach(d => { bookedSlots[d.id] = d.data().label || '予約済み'; });
+
+    const daysOffSnap = await getDocs(collection(db, 'daysOff'));
+    daysOff = new Set();
+    daysOffSnap.forEach(d => daysOff.add(d.id));
+
+    renderCalendar();
+  }
+
+  function showSaving(on) {
+    document.getElementById('saving-indicator').style.display = on ? 'block' : 'none';
+  }
+
+  // ── SLOT TOGGLE ──
+  window.toggleSlot = async function (dateStr, hour) {
+    const key = `${dateStr}_${hour}`;
+    showSaving(true);
+    try {
+      if (bookedSlots[key]) {
+        await deleteDoc(doc(db, 'bookings', key));
+        delete bookedSlots[key];
+      } else {
+        const label = prompt('ラベル（省略可） / Label (optional):', '予約済み') || '予約済み';
+        await setDoc(doc(db, 'bookings', key), { date: dateStr, hour, label });
+        bookedSlots[key] = label;
+      }
+    } finally {
+      showSaving(false);
+      renderCalendar();
+    }
+  };
+
+  // ── DAY OFF TOGGLE ──
+  window.toggleDayOff = async function (dateStr) {
+    showSaving(true);
+    try {
+      if (daysOff.has(dateStr)) {
+        await deleteDoc(doc(db, 'daysOff', dateStr));
+        daysOff.delete(dateStr);
+      } else {
+        if (!confirm(`${dateStr} を終日休みにしますか？ / Mark ${dateStr} as a full day off?`)) { showSaving(false); return; }
+        await setDoc(doc(db, 'daysOff', dateStr), { date: dateStr });
+        daysOff.add(dateStr);
+      }
+    } finally {
+      showSaving(false);
+      renderCalendar();
+    }
+  };
+
+  // ── CALENDAR RENDER ──
+  let weekOffset = 0;
+  const DAYS_JP = ['日','月','火','水','木','金','土'];
+  const DAYS_EN = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const START_HOUR = 6, END_HOUR = 22;
+
+  function getWeekDates(offset) {
+    const now = new Date();
+    const day = now.getDay();
+    const monday = new Date(now);
+    monday.setDate(now.getDate() - (day === 0 ? 6 : day - 1) + offset * 7);
+    const dates = [];
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(monday);
+      d.setDate(monday.getDate() + i);
+      dates.push(d);
+    }
+    return dates;
+  }
+  function fmtDate(d) { return `${d.getMonth()+1}/${d.getDate()}`; }
+  function dateStr(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+
+  window.changeWeek = function (dir) {
+    weekOffset += dir;
+    renderCalendar();
+  };
+
+  function renderCalendar() {
+    const dates = getWeekDates(weekOffset);
+    const cal = document.getElementById('calendar');
+    cal.innerHTML = '';
+
+    document.getElementById('week-range').textContent = `${fmtDate(dates[0])} 〜 ${fmtDate(dates[6])}`;
+
+    const timeHeader = document.createElement('div');
+    timeHeader.className = 'cal-header time-header';
+    timeHeader.textContent = '時間';
+    cal.appendChild(timeHeader);
+
+    dates.forEach(d => {
+      const ds = dateStr(d);
+      const hdr = document.createElement('div');
+      hdr.className = 'cal-header' + (daysOff.has(ds) ? ' day-off' : '');
+      hdr.innerHTML = `<span class="day-name">${DAYS_JP[d.getDay()]} ${DAYS_EN[d.getDay()]}</span><span class="day-date">${fmtDate(d)}</span>`;
+      hdr.onclick = () => toggleDayOff(ds);
+      cal.appendChild(hdr);
+    });
+
+    for (let hour = START_HOUR; hour < END_HOUR; hour++) {
+      const timeLabel = document.createElement('div');
+      timeLabel.className = 'cal-time';
+      timeLabel.textContent = `${hour}:00`;
+      cal.appendChild(timeLabel);
+
+      dates.forEach(d => {
+        const ds = dateStr(d);
+        const key = `${ds}_${hour}`;
+        const cell = document.createElement('div');
+        if (daysOff.has(ds)) {
+          cell.className = 'cal-slot day-off-slot';
+          cell.textContent = '休み';
+        } else if (bookedSlots[key]) {
+          cell.className = 'cal-slot booked-slot';
+          cell.textContent = bookedSlots[key];
+          cell.onclick = () => toggleSlot(ds, hour);
+        } else {
+          cell.className = 'cal-slot available-slot';
+          cell.textContent = '○';
+          cell.onclick = () => toggleSlot(ds, hour);
+        }
+        cal.appendChild(cell);
+      });
+    }
+  }
+</script>
+</body>
+</html>
