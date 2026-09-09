@@ -450,12 +450,17 @@
   const db = getFirestore(app);
 
   let bookedSlots = {}; // key: "YYYY-MM-DD_H" -> label
+  let recurringSlots = {}; // key: "weekday_H" -> label
   let daysOff = new Set();
 
   async function loadData() {
     const bookingsSnap = await getDocs(collection(db, 'bookings'));
     bookedSlots = {};
     bookingsSnap.forEach(d => { bookedSlots[d.id] = d.data().label || '予約済み'; });
+
+    const recurringSnap = await getDocs(collection(db, 'recurringSlots'));
+    recurringSlots = {};
+    recurringSnap.forEach(d => { recurringSlots[d.id] = d.data().label || '予約済み'; });
 
     const daysOffSnap = await getDocs(collection(db, 'daysOff'));
     daysOff = new Set();
@@ -512,6 +517,7 @@
       dates.forEach(d => {
         const ds = dateStr(d);
         const key = `${ds}_${hour}`;
+        const recurKey = `${d.getDay()}_${hour}`;
         const cell = document.createElement('div');
         if (daysOff.has(ds)) {
           cell.className = 'cal-slot booked-slot';
@@ -519,6 +525,9 @@
         } else if (bookedSlots[key]) {
           cell.className = 'cal-slot booked-slot';
           cell.textContent = bookedSlots[key];
+        } else if (recurringSlots[recurKey]) {
+          cell.className = 'cal-slot booked-slot';
+          cell.textContent = recurringSlots[recurKey];
         } else {
           cell.className = 'cal-slot available-slot';
           cell.textContent = '○';

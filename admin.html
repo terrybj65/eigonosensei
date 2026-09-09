@@ -136,6 +136,7 @@
   <div class="legend">
     <div class="legend-item"><div class="legend-dot available"></div>空き · Available</div>
     <div class="legend-item"><div class="legend-dot booked"></div>予約済み · Booked</div>
+    <div class="legend-item">🔁 毎週繰り返し · Recurs weekly</div>
   </div>
 
   <div class="week-nav">
@@ -194,13 +195,18 @@
   });
 
   // ── DATA ──
-  let bookedSlots = {}; // key: "YYYY-MM-DD_H" -> label
+  let bookedSlots = {}; // key: "YYYY-MM-DD_H" -> label  (one-time bookings)
+  let recurringSlots = {}; // key: "weekday_H" (0=Sun..6=Sat) -> label  (repeats every week)
   let daysOff = new Set(); // set of "YYYY-MM-DD"
 
   async function loadAndRender() {
     const bookingsSnap = await getDocs(collection(db, 'bookings'));
     bookedSlots = {};
     bookingsSnap.forEach(d => { bookedSlots[d.id] = d.data().label || '予約済み'; });
+
+    const recurringSnap = await getDocs(collection(db, 'recurringSlots'));
+    recurringSlots = {};
+    recurringSnap.forEach(d => { recurringSlots[d.id] = d.data().label || '予約済み（毎週）'; });
 
     const daysOffSnap = await getDocs(collection(db, 'daysOff'));
     daysOff = new Set();
@@ -213,18 +219,33 @@
     document.getElementById('saving-indicator').style.display = on ? 'block' : 'none';
   }
 
-  // ── SLOT TOGGLE ──
-  window.toggleSlot = async function (dateStr, hour) {
+  // ── SLOT TOGGLE ── (dateStr/hour identify the exact cell clicked; weekday needed for recurring)
+  window.toggleSlot = async function (dateStr, hour, weekday) {
     const key = `${dateStr}_${hour}`;
+    const recurKey = `${weekday}_${hour}`;
     showSaving(true);
     try {
       if (bookedSlots[key]) {
+        // remove a one-time booking
         await deleteDoc(doc(db, 'bookings', key));
         delete bookedSlots[key];
+      } else if (recurringSlots[recurKey]) {
+        // this cell is booked because of a recurring weekly slot
+        if (confirm('これは毎週繰り返しの予約です。今後すべての週で解除しますか？\nThis is a recurring weekly booking. Cancel it for all future weeks?')) {
+          await deleteDoc(doc(db, 'recurringSlots', recurKey));
+          delete recurringSlots[recurKey];
+        }
       } else {
+        // creating a new booking — ask one-time vs recurring
+        const isRecurring = confirm(`この時間を毎週繰り返しの予約にしますか？\nMake this a recurring WEEKLY booking (every ${DAYS_JP[weekday]}曜日 ${hour}:00)?\n\nOK = 毎週 / Weekly　　キャンセル = 今回のみ / Just this once`);
         const label = prompt('ラベル（省略可） / Label (optional):', '予約済み') || '予約済み';
-        await setDoc(doc(db, 'bookings', key), { date: dateStr, hour, label });
-        bookedSlots[key] = label;
+        if (isRecurring) {
+          await setDoc(doc(db, 'recurringSlots', recurKey), { weekday, hour, label });
+          recurringSlots[recurKey] = label;
+        } else {
+          await setDoc(doc(db, 'bookings', key), { date: dateStr, hour, label });
+          bookedSlots[key] = label;
+        }
       }
     } finally {
       showSaving(false);
@@ -308,17 +329,22 @@
         const ds = dateStr(d);
         const key = `${ds}_${hour}`;
         const cell = document.createElement('div');
+        const recurKey = `${d.getDay()}_${hour}`;
         if (daysOff.has(ds)) {
           cell.className = 'cal-slot day-off-slot';
           cell.textContent = '休み';
         } else if (bookedSlots[key]) {
           cell.className = 'cal-slot booked-slot';
           cell.textContent = bookedSlots[key];
-          cell.onclick = () => toggleSlot(ds, hour);
+          cell.onclick = () => toggleSlot(ds, hour, d.getDay());
+        } else if (recurringSlots[recurKey]) {
+          cell.className = 'cal-slot booked-slot';
+          cell.textContent = recurringSlots[recurKey] + ' 🔁';
+          cell.onclick = () => toggleSlot(ds, hour, d.getDay());
         } else {
           cell.className = 'cal-slot available-slot';
           cell.textContent = '○';
-          cell.onclick = () => toggleSlot(ds, hour);
+          cell.onclick = () => toggleSlot(ds, hour, d.getDay());
         }
         cal.appendChild(cell);
       });
