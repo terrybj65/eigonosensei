@@ -879,6 +879,9 @@
       line-height: 1.8;
       margin-top: 0.75rem;
     }
+  .areas-details summary::-webkit-details-marker { display: none; }
+  .areas-details summary { list-style: none; }
+  .areas-details summary::marker { content: ""; }
   </style>
 </head>
 <body>
@@ -1093,7 +1096,11 @@
   <div class="divider"></div>
   <p class="section-title-sub">Coverage expanding station by station.</p>
   <p style="text-align:center;max-width:640px;margin:0 auto 1.5rem;color:var(--ink-md);"><span lang-tag="ja">通勤・通学で町田にお立ち寄りの方はそのままレッスンへ。オンラインレッスンも組み合わせながら、下記エリアの方にも対応しています。</span><span lang-tag="en">If you already pass through Machida on your commute, lessons fit right in — combined with online options, the areas below are also covered.</span></p>
-  <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;">
+  <details class="areas-details" style="max-width:900px;margin:0 auto;">
+    <summary style="cursor:pointer;list-style:none;text-align:center;padding:0.75rem 1.5rem;border-radius:999px;background:var(--paper);border:1px solid var(--border);color:var(--ink);font-size:0.95rem;font-weight:600;box-shadow:var(--shadow);width:fit-content;margin:0 auto;">
+      <span lang-tag="ja">対応駅一覧を見る（全43駅）▾</span><span lang-tag="en">View All Stations We Cover (43) ▾</span>
+    </summary>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;margin-top:1.25rem;">
     <a href="sagami-ono.html" style="padding:0.5rem 1.25rem;border-radius:999px;background:var(--paper);border:1px solid var(--border);color:var(--ink);text-decoration:none;font-size:0.9rem;box-shadow:var(--shadow);"><span lang-tag="ja">相模大野での英会話レッスン</span><span lang-tag="en">English Lessons Near Sagami-Ono</span></a>
     <a href="ebina.html" style="padding:0.5rem 1.25rem;border-radius:999px;background:var(--paper);border:1px solid var(--border);color:var(--ink);text-decoration:none;font-size:0.9rem;box-shadow:var(--shadow);"><span lang-tag="ja">海老名での英会話レッスン</span><span lang-tag="en">English Lessons Near Ebina</span></a>
     <a href="hon-atsugi.html" style="padding:0.5rem 1.25rem;border-radius:999px;background:var(--paper);border:1px solid var(--border);color:var(--ink);text-decoration:none;font-size:0.9rem;box-shadow:var(--shadow);"><span lang-tag="ja">本厚木での英会話レッスン</span><span lang-tag="en">English Lessons Near Hon-Atsugi</span></a>
@@ -1137,7 +1144,8 @@
     <a href="nakayama.html" style="padding:0.5rem 1.25rem;border-radius:999px;background:var(--paper);border:1px solid var(--border);color:var(--ink);text-decoration:none;font-size:0.9rem;box-shadow:var(--shadow);"><span lang-tag="ja">中山での英会話レッスン</span><span lang-tag="en">English Lessons Near Nakayama</span></a>
     <a href="kamoi.html" style="padding:0.5rem 1.25rem;border-radius:999px;background:var(--paper);border:1px solid var(--border);color:var(--ink);text-decoration:none;font-size:0.9rem;box-shadow:var(--shadow);"><span lang-tag="ja">鴨居での英会話レッスン</span><span lang-tag="en">English Lessons Near Kamoi</span></a>
     <a href="kozukue.html" style="padding:0.5rem 1.25rem;border-radius:999px;background:var(--paper);border:1px solid var(--border);color:var(--ink);text-decoration:none;font-size:0.9rem;box-shadow:var(--shadow);"><span lang-tag="ja">小机での英会話レッスン</span><span lang-tag="en">English Lessons Near Kozukue</span></a>
-  </div>
+    </div>
+  </details>
 </div>
 
 <!-- PRICING -->
